@@ -1,4 +1,4 @@
-;(function(){
+;(function($){
 
 	postJson = function(params) {
 		return $.ajax({
@@ -27,4 +27,4 @@
 			e.preventDefault();
 		});
 	};
-})();
+})($);
