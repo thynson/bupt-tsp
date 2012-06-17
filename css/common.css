@@ -17,10 +17,15 @@ body {
 }
 
 #loginBox {
-    width: 30%;
+    width: 27%;
     margin: auto;
 }
 
 #loginForm {
+    margin: 0 0 0 0;
+}
+
+#loginForm table {
+    width: 100%;
 }
 
