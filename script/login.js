@@ -13,6 +13,10 @@
 			},
 			error : function() {
 				$("#alertText").text("系统异常");
+                $(".close").click(function(){
+                    $(".alert").hide(200);
+                });
+                $(".alert").show(200);
 			}
 		});
 	});
