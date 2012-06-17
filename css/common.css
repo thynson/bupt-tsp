@@ -4,13 +4,13 @@ body {
     font-family: Tahoma, Helvetica, Arial, DejaVu Sans, sans-serif;
 }
 
-#wrapperDiv {
+#wrapper {
     width: 998px;
     margin: auto;
     overflow: hidden;
 }
 
-#bannerDiv {
+#banner {
     width: 100%;
     height: 130px;
     background: url("/img/banner-bg.png") no-repeat;
