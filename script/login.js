@@ -1,5 +1,5 @@
 
-;(function(){
+;(function($){
 	ajaxSubmit($("#loginForm"), function(){
 		postJson({
 			url : "/login",
@@ -15,6 +15,6 @@
 				$("#alertText").text("系统异常");
 			}
 		});
-	}));
+	});
 
-})();
+})($);
