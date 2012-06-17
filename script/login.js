@@ -6,13 +6,13 @@
 			data : $("#loginForm").serialize(),
 			callback : function(obj){
 				if (obj.err) {
-					$("#infoDiv").text(obj.err);
+					$("#alertText").text(obj.err);
 				} else {
 					location.href = "/panel.html";
 				}
 			},
 			error : function() {
-				$("#infoDiv").text("系统异常");
+				$("#alertText").text("系统异常");
 			}
 		});
 	}));

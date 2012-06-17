@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <title>北京邮电大学软件学院毕业课题双选系统</title>
-    <link type="text/css" rel="stylesheet" href="/css/common.css">
+    <link type="text/css" rel="stylesheet" href="/css/common.css" />
   </head>
   <body>
-    <div id="wrapperDiv">
-      <div id="bannerDiv"></div>
-      <div id="announceDiv"></div>
+    <div id="wrapper">
+      <div id="banner"></div>
+      <div id="announce"></div>
       <div id="loginBox">
         <form id="loginForm">
           <table>
             <tr>
               <td>帐号</td>
-              <td><input class="formInput" id="usernameEntry" type="text" name="username"/></td>
+              <td><input id="username" type="text" name="username"/></td>
             </tr>
             <tr>
               <td>密码</td>
-              <td><input class="formInput" id="passwordEntry" type="text" name="password"/></td>
+              <td><input id="password" type="text" name="password"/></td>
             </tr>
             <tr>
               <td colspan="2" align="right">
-                <div id="infoDiv"></div>
+                <div id="alertText"></div>
               </td>
             </tr>
             <tr>
               <td colspan="2" align="right">
-                <button type="submit" id="loginSubmitButton">登录</button>
+                <button type="submit" id="login">登录</button>
               </td>
             </tr>
           </table>
         </form>
       </div>
     </div>
-    <div id="footerDiv"></div>
+    <div class="footer"></div>
     <script type="text/javascript" src="/script/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="/script/jquery.cookie.js"></script>
     <script type="text/javascript" src="/script/common.js"></script>
