@@ -1,22 +1,115 @@
 <!DOCTYPE html>
 <html>
-	<head>
+  <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <title>北京邮电大学软件学院毕业课题双选系统</title>
-		<link type="text/css" rel="stylesheet" href="/css/common.css">
-	</head>
-	<body>
-		<div id="wrapper">
-		<div id="banner"></div>
-			<div class="panel-sidebar">
-			</div>
-			<div class="panel-main">
-			</div>
-		<div id="footer"></div>
-		</div>
-		<script type="text/javascript" src="/script/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="/script/jquery.cookie.js"></script>
-		<script type="text/javascript" src="/script/common.js"></script>
-		<script type="text/javascript" src="/script/panel.js"></script>
-	</body>
+        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/common.css"/>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="banner"></div>
+
+      <!--- {{{panel -->
+        <div class="panel-sidebar">
+
+          <!--- For student -->
+          <div class="hide student" id="side-student">
+            <table>
+
+              <tr>
+                <td><label>学号</label></td>
+                <td class="id-number"></td>
+              </tr>
+
+              <tr>
+                <td><label>姓名</label></td>
+                <td class="name"></td>
+              </tr>
+
+              <tr>
+                <td><label>班内序号</label></td>
+                <td id="order-number"></td>
+              </tr>
+
+            </table>
+          </div>
+
+          <!-- For professor -->
+          <div class="hide professor" id="side-professor">
+            <table>
+
+              <tr>
+                <td><label>姓名</label></td>
+                <td id="professor-name"></td>
+              </tr>
+
+            </table>
+          </div>
+
+          <!-- For admin -->
+          <div class="hide admin" id="side-admin">
+
+          </div>
+
+        </div>
+      <!--- }}} panel -->
+
+        <div id="panel-main">
+
+          <!-- Common part -->
+
+          <div class="phase-indicator">
+            <label>当前阶段：</label>
+            <div class="phase-value">
+            </div>
+          </div>
+
+          <!-- For student -->
+          <div class="student hide" id="panel-student">
+
+            <div id="student-nav-tab">
+              <ul class="nav nav-tabs">
+                <li class="active">
+                  <a href="#target-a" data-toggle="tab" >A</a>
+                </li>
+                <li>
+                  <a href="#target-b" data-toggle="tab" >B</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div id="target-a" class="tab-pane active">
+                  A
+                </div>
+
+                <div id="target-b" class="tab-pane">
+                  B
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- For professor -->
+          <div id="main-professor"  class="professor hide">
+
+          </div>
+
+          <!-- For admin -->
+          <div id="main-admin" class="admin hide">
+
+          </div>
+
+        </div>
+
+      <div id="footer"></div>
+    </div>
+
+    <script type="text/javascript" src="/script/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/script/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/script/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="/script/common.js"></script>
+    <script type="text/javascript" src="/script/panel.js"></script>
+  </body>
 </html>
