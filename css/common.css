@@ -7,12 +7,14 @@ body {
 #wrapper {
     width: 998px;
     margin: auto;
+    margin-top: 20px;
     overflow: hidden;
 }
 
 #banner {
-    width: 100%;
+    width: 600px;
     height: 130px;
+    margin: auto;
     background: url("/img/banner-bg.png") no-repeat;
     margin: 20px;
 }
