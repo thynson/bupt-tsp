@@ -23,7 +23,10 @@
 
 	ajaxSubmit = function(form, callback){
 		form.submit(function(e){
-			callback();
+			try {
+				callback();
+			} catch(err) {
+			}
 			e.preventDefault();
 		});
 	};
