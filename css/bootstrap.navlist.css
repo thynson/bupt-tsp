@@ -1,0 +1,8 @@
+
+.nav-list-content > .nav-list-pane {
+    display: none;
+}
+
+.nav-list-content > .active {
+    display: block;
+}

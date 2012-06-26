@@ -4,6 +4,7 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <title>北京邮电大学软件学院毕业课题双选系统</title>
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.navlist.css" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
     <link type="text/css" rel="stylesheet" href="/css/common.css"/>
   </head>
@@ -21,18 +22,15 @@
 
             <!-- For student -->
             <ul class="nav nav-list student hide">
-              <li class="nav-header">
-              导航
-              </li>
+              <li class="nav-header">导航</li>
 
-              <li class="active"><a href="#">ABCDEFG</a></li>
-              <li class="inactive"><a href="#">abcdefg</a></li>
+              <li class="active"><a data-toggle="nav-list" href="#change-profile">修改资料</a></li>
+              <li class="student"><a data-toggle="nav-list" href="#select-subject">选择课题</a></li>
+
+              <li><a data-toggle="nav-list" href="#nothing">abcdefg</a></li>
 
 
-              <li class="nav-header">
-              个人信息
-              </li>
-
+              <li class="nav-header">个人信息</li>
               <li>
               <table>
                 <tr>
@@ -52,80 +50,44 @@
               </table>
               </li>
             </ul>
-
-            <!-- For teacher -->
-            <ul class="nav nav-list teacher hide">
-              <li class="nav-header">
-              导航
-              </li>
-
-              <li class="active"><a href="#">ABCDEFG</a></li>
-              <li class="inactive"><a href="#">abcdefg</a></li>
-
-
-              <li class="nav-header">
-              个人信息
-              </li>
-
-              <li>
-              <table>
-                <tr>
-                  <td><label>学号</label></td>
-                  <td class="id-number"></td>
-                </tr>
-
-                <tr>
-                  <td><label>姓名</label></td>
-                  <td class="name"></td>
-                </tr>
-
-                <tr>
-                  <td><label>序号</label></td>
-                  <td id="order-number"></td>
-                </tr>
-              </table>
-              </li>
-            </ul>
-
-            <!-- For administrator -->
-            <ul class="nav nav-list admin hide">
-              <li class="nav-header">
-              导航
-              </li>
-
-              <li class="active"><a href="#">ABCDEFG</a></li>
-              <li class="inactive"><a href="#">abcdefg</a></li>
-
-
-              <li class="nav-header">
-              个人信息
-              </li>
-
-              <li>
-              <table>
-                <tr>
-                  <td><label>学号</label></td>
-                  <td class="id-number"></td>
-                </tr>
-
-                <tr>
-                  <td><label>姓名</label></td>
-                  <td class="name"></td>
-                </tr>
-
-                <tr>
-                  <td><label>序号</label></td>
-                  <td id="order-number"></td>
-                </tr>
-              </table>
-              </li>
-            </ul>
-
           </div>
         </div>
 
         <div class="span9 columns">
           <div class="well">
+            <div class="nav-list-content">
+              <div class="nav-list-pane fade in active" id="change-profile">
+                <form id="change-password-form">
+                      <legend>修改密码</legend>
+                        <table id="change-password">
+                          <tr>
+                            <td><label>旧密码</label></td>
+                            <td><input type="password"/></td>
+                          </tr>
+                          <tr>
+                            <td><label>旧密码</label></td>
+                            <td><input type="password"/></td>
+                          </tr>
+                          <tr>
+                            <td><label>重复新密码</label></td>
+                            <td><input type="password"/></td>
+                          </tr>
+                        </table>
+                        <button class="btn btn-primary">提交</button>
+                </form>
+
+                <form id="upload-resume">
+                  <legend>上传简历</legend>
+                  <input id="resume-selector" class="input-file" type="file"/>
+                  <br/>
+                  <button class="btn btn-primary">提交</button>
+                </form>
+              </div>
+
+              <div class="nav-list-pane fade" id="select-subject">
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -142,7 +104,7 @@
     <script type="text/javascript" src="/script/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="/script/jquery.cookie.js"></script>
     <script type="text/javascript" src="/script/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/script/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="/script/bootstrap-navlist.js"></script>
     <script type="text/javascript" src="/script/common.js"></script>
     <script type="text/javascript" src="/script/panel.js"></script>
   </body>
