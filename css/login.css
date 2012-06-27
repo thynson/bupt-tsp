@@ -1,7 +1,8 @@
 
 #loginBox {
-    width: 27%;
     margin: auto;
+    display: block;
+    position: relative;
 }
 
 #loginForm {
