@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.navlist.css" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
     <link type="text/css" rel="stylesheet" href="/css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/panel.css"/>
   </head>
   <body>
     <div class="container">
@@ -20,35 +21,51 @@
         <div class="span3 columns">
           <div class="well">
 
-            <!-- For student -->
-            <ul class="nav nav-list student hide">
+            <ul class="nav nav-list">
               <li class="nav-header">导航</li>
 
               <li class="active"><a data-toggle="nav-list" href="#change-profile">修改资料</a></li>
               <li class="student"><a data-toggle="nav-list" href="#select-subject">选择课题</a></li>
+              <li class="professor"><a data-toggle="nav-list" href="#add-subject">增加课题</a></li>
+              <li class="professor"><a data-toggle="nav-list" href="#select-student">选择学生</a></li>
+              <li class="admin"><a data-toggle="nav-list" href="#system-admin">系统管理</a></li>
+              <li class="admin"><a data-toggle="nav-list" href="#match-student">调节学生</a></li>
 
-              <li><a data-toggle="nav-list" href="#nothing">abcdefg</a></li>
 
 
-              <li class="nav-header">个人信息</li>
+              <li class="nav-header student professor hide">个人信息</li>
               <li>
-              <table>
+              <table class="student hide">
                 <tr>
                   <td><label>学号</label></td>
-                  <td class="id-number"></td>
+                  <td class="student-id"></td>
                 </tr>
 
                 <tr>
                   <td><label>姓名</label></td>
-                  <td class="name"></td>
+                  <td class="student-name"></td>
                 </tr>
 
                 <tr>
                   <td><label>序号</label></td>
-                  <td id="order-number"></td>
+                  <td id="student-order"></td>
+                </tr>
+              </table>
+
+              <table class="professor hide">
+                <tr>
+                  <td><label>姓名</label></td>
+                  <td class="professor-name"></td>
+                </tr>
+
+                <tr>
+                  <td><label>职称</label></td>
+                  <td id="professor-class"></td>
                 </tr>
               </table>
               </li>
+
+              <li class="nav-header">公告</li>
             </ul>
           </div>
         </div>
@@ -57,41 +74,113 @@
           <div class="well">
             <div class="nav-list-content">
               <div class="nav-list-pane fade in active" id="change-profile">
-                <form id="change-password-form">
-                      <legend>修改密码</legend>
-                        <table id="change-password">
-                          <tr>
-                            <td><label>旧密码</label></td>
-                            <td><input type="password"/></td>
-                          </tr>
-                          <tr>
-                            <td><label>旧密码</label></td>
-                            <td><input type="password"/></td>
-                          </tr>
-                          <tr>
-                            <td><label>重复新密码</label></td>
-                            <td><input type="password"/></td>
-                          </tr>
-                        </table>
-                        <button class="btn btn-primary">提交</button>
+                <form id="change-password-form" class="form-horizontal">
+                  <legend>修改密码</legend>
+                  <div class="control-group">
+                    <label class="control-label">旧密码</label>
+                    <div class="controls">
+                      <input class="input-xlarge focused" type="password"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">新密码</label>
+                    <div class="controls">
+                      <input class="input-xlarge focused" type="password"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">确认新密码</label>
+                    <div class="controls">
+                      <input class="input-xlarge focused" type="password"/>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">提交</button>
+                    <button class="btn">重置</button>
+                  </div>
                 </form>
 
-                <form id="upload-resume">
+                <form id="upload-resume" class="student hide form-horizontal">
                   <legend>上传简历</legend>
-                  <input id="resume-selector" class="input-file" type="file"/>
-                  <br/>
-                  <button class="btn btn-primary">提交</button>
+                  <div class="control-group">
+                    <label class="control-label">选择文件</label>
+                    <div class="controls">
+                      <input class="input-xlarge focused" type="file"
+                      class="input-file"/>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">提交</button>
+                    <button class="btn">重置</button>
+                  </div>
                 </form>
               </div>
 
               <div class="nav-list-pane fade" id="select-subject">
 
               </div>
+
+              <div class="nav-list-pane fade" id="add-subject">
+                <legend>增加课题</legend>
+                <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label">课题名</label>
+                      <div class="controls">
+                        <input class="input-xlarge focused" type="text"/>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">课题描述</label>
+                      <div class="controls">
+                        <textarea class="focused textarea" type="text">
+                        </textarea>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <button class="btn btn-primary" type="submit">提交</button>
+                      <button class="btn">重置</button>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+
+              <div class="nav-list-pane fade" id="select-student">
+
+              </div>
+
+              <div class="nav-list-pane fade" id="system-admin">
+                <legend>发布公告</legend>
+                <form class="form-horizontal">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label">公告内容</label>
+                      <div class="controls">
+                        <textarea class="focused textarea" name="content"
+                          id="announceTextarea"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <button class="btn btn-primary" type="submit">提交</button>
+                      <button class="btn">重置</button>
+                    </div>
+                  </fieldset>
+                </form>
+
+                <legend>查看选课情况</legend>
+
+              </div>
+
+              <div class="nav-list-pane fade" id="match-student">
+
+              </div>
+
+
             </div>
           </div>
         </div>
-      </div>
 
+      </div>
       <hr/>
       <div id="footer" >
         <p>Copyright &copy; 2012 All right reserved</p>
@@ -105,6 +194,7 @@
     <script type="text/javascript" src="/script/jquery.cookie.js"></script>
     <script type="text/javascript" src="/script/bootstrap.min.js"></script>
     <script type="text/javascript" src="/script/bootstrap-navlist.js"></script>
+    <script type="text/javascript" src="/script/bootstrap-alert.js"></script>
     <script type="text/javascript" src="/script/common.js"></script>
     <script type="text/javascript" src="/script/panel.js"></script>
   </body>
