@@ -165,7 +165,7 @@
                       <div class="control-label">
                         前一阶段
                       </div>
-                      <div class="controls">
+                      <div class="controls phase-prev">
                       </div>
                     </div>
                     <div class="control-group">
@@ -173,7 +173,7 @@
                         <div class="control-label">
                           当前阶段
                         </div>
-                        <div class="controls">
+                        <div class="controls phase-current">
                         </div>
                       </h4>
                     </div>
@@ -181,12 +181,26 @@
                       <div class="control-label">
                         下一阶段
                       </div>
+                      <div class="controls phase-next" id="nextPhase">
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <div class="control-label">
+                        密码
+                      </div>
                       <div class="controls">
+                        <input type="password"/>
+                        <p class="help-block">为防止误操作，请输入密码</p>
                       </div>
                     </div>
                   </fieldset>
                   <div class="form-actions">
                     <button class="btn btn-primary">进入下一阶段</button>
+                    <div class="alert fade in hide" data-alert="alert"
+                      id="phaseControlAlert">
+                      <a class="close" href="#">&times</a>
+                      <p id="phaseControlAlertText"><p>
+                    </div>
                   </div>
                 </form>
 

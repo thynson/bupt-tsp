@@ -53,6 +53,19 @@
 		}
 	});
 
+    var updatePhase = function(){
+        getJson({
+            url : "/phase",
+            callback : function(obj) {
+                $(".phase-prev").text(obj.phase-1);
+                $(".phase-current").text(obj.phase);
+                $(".phase-next").text(obj.phase+1);
+            }
+        });
+    }
+
+    updatePhase();
+
 
     // Setup logout button
     $("#logout").click(logout);
@@ -97,8 +110,14 @@
             url : "/phase",
             data : "",
             callback : function(obj) {
+                if (obj.err) {
+                    alertFailure($("#phaseControlAlert"), $("#phaseControlAlertText"), obj.err);
+                } else {
+                    alertSuccess($("#phaseControlAlert"), $("#phaseControlAlertText"), "成功进入下一阶段");
+                }
             },
             error : function(obj) {
+                alertInternalError($("#phaseControlAlert"), $("#phaseControlAlertText"));
             }
         });
     });
