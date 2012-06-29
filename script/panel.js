@@ -50,4 +50,29 @@
 		}
 	});
 
+
+    // Setup logout button
+    $("#logout").click(logout);
+
+    // professor add subject
+    ajaxSubmit($("#addSubjectForm"), function() {
+        postJson({
+            url : "/add",
+            data : $("#addSubjectForm").serialize(),
+            callback : function(obj) {
+                if (obj.err) {
+                    $("#addSubjectAlertText").addClass("alert-error");
+                    $("#addSubjectAlertText").text(obj.err);
+                    $("#addSubjectAlert").show("fast");
+                } else {
+                    $("#addSubjectAlertText").removeClass("alert-error");
+                    $("#addSubjectAlertText").text("成功");
+                    $("#addSubjectAlert").show("fast");
+                }
+            },
+            error : function() {
+            }
+        });
+    });
+
 })($);

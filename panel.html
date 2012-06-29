@@ -124,7 +124,7 @@
 
               <div class="nav-list-pane fade well" id="add-subject">
                 <legend>增加课题</legend>
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="addSubjectForm">
                   <fieldset>
                     <div class="control-group">
                       <label class="control-label">课题名</label>
@@ -142,6 +142,11 @@
                     <div class="form-actions">
                       <button class="btn btn-primary" type="submit">提交</button>
                       <button class="btn">重置</button>
+                      <div class="alert fade in hide"
+                        data-alert="alert" id="addSubjectAlert">
+                        <a class="close" href="#">&times</a>
+                        <p id="addSubjectAlertText"><p>
+                      </div>
                     </div>
                   </fieldset>
                 </form>
@@ -153,7 +158,7 @@
 
               <div class="nav-list-pane fade well" id="system-admin">
                 <legend>发布公告</legend>
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="issuceAnnounce">
                   <fieldset>
                     <div class="control-group">
                       <label class="control-label">公告内容</label>
