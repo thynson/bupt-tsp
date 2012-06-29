@@ -74,6 +74,9 @@
                 }
             },
             error : function() {
+                $("#addSubjectAlertText").addClass("alert-error");
+                $("#addSubjectAlertText").text("系统或网络异常);
+                $("#addSubjectAlert").show("fast");
             }
         });
     });
