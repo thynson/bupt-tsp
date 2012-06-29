@@ -19,7 +19,7 @@
 
       <div id="content" class="row">
         <div class="span3 columns">
-          <div class="well">
+          <div >
 
             <ul class="nav nav-list">
               <li class="nav-header">导航</li>
@@ -38,43 +38,45 @@
               <table class="student hide">
                 <tr>
                   <td><label>学号</label></td>
-                  <td class="student-id"></td>
+                  <td class="profile-id"></td>
                 </tr>
 
                 <tr>
                   <td><label>姓名</label></td>
-                  <td class="student-name"></td>
+                  <td class="profile-name"></td>
                 </tr>
 
                 <tr>
                   <td><label>序号</label></td>
-                  <td id="student-order"></td>
+                  <td id="profile-order"></td>
                 </tr>
               </table>
 
               <table class="professor hide">
                 <tr>
                   <td><label>姓名</label></td>
-                  <td class="professor-name"></td>
+                  <td class="profile-name"></td>
                 </tr>
 
                 <tr>
                   <td><label>职称</label></td>
-                  <td id="professor-class"></td>
+                  <td id="profile-class"></td>
                 </tr>
               </table>
+              <center><button class="btn" id="logout">登出</button></center>
               </li>
 
               <li class="nav-header">公告</li>
+              <div class="well strong">系统调试中</div>
             </ul>
           </div>
         </div>
 
         <div class="span9 columns">
-          <div class="well">
+          <div>
             <div class="nav-list-content">
               <div class="nav-list-pane fade in active" id="change-profile">
-                <form id="change-password-form" class="form-horizontal">
+                <form id="change-password-form" class="form-horizontal well">
                   <legend>修改密码</legend>
                   <div class="control-group">
                     <label class="control-label">旧密码</label>
@@ -100,7 +102,7 @@
                   </div>
                 </form>
 
-                <form id="upload-resume" class="student hide form-horizontal">
+                <form id="upload-resume" class="student hide form-horizontal well">
                   <legend>上传简历</legend>
                   <div class="control-group">
                     <label class="control-label">选择文件</label>
@@ -116,11 +118,11 @@
                 </form>
               </div>
 
-              <div class="nav-list-pane fade" id="select-subject">
+              <div class="nav-list-pane fade well" id="select-subject">
 
               </div>
 
-              <div class="nav-list-pane fade" id="add-subject">
+              <div class="nav-list-pane fade well" id="add-subject">
                 <legend>增加课题</legend>
                 <form class="form-horizontal">
                   <fieldset>
@@ -145,11 +147,11 @@
                 </form>
               </div>
 
-              <div class="nav-list-pane fade" id="select-student">
+              <div class="nav-list-pane fade well" id="select-student">
 
               </div>
 
-              <div class="nav-list-pane fade" id="system-admin">
+              <div class="nav-list-pane fade well" id="system-admin">
                 <legend>发布公告</legend>
                 <form class="form-horizontal">
                   <fieldset>
@@ -171,7 +173,7 @@
 
               </div>
 
-              <div class="nav-list-pane fade" id="match-student">
+              <div class="nav-list-pane fade well" id="match-student">
 
               </div>
 
