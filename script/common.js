@@ -15,6 +15,7 @@
 		return $.ajax({
 			type : "GET",
 			url : params.url,
+			dataType : "json",
 			success : params.callback,
 			error : params.error
 		});
