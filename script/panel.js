@@ -4,6 +4,9 @@
 
 (function($){
 
+    var phaseText = function(num) {
+    }
+
     var enableClass = function(type) {
         $("."+type).removeClass("hide");
     }
@@ -74,5 +77,11 @@
             }
         });
     });
+
+
+    ajaxSubmit($("#phaseControl"), function() {
+        // Dummy
+    });
+
 
 })($);
