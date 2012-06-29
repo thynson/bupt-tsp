@@ -89,9 +89,9 @@
     // Change password logic
     ajaxSubmit($("#changePasswordForm"), function() {
         var username = $.cookie('username');
-        var oldPassword = $("#oldPassword").text();
-        var newPassword = $("#newPassword").text();
-        var confirmPassword = $("#confirmPassword").text();
+        var oldPassword = $("#oldPassword").val();
+        var newPassword = $("#newPassword").val();
+        var confirmPassword = $("#confirmPassword").val();
 
         if (newPassword != confirmPassword) {
             alertFailure($("#changePasswordAlert"),
