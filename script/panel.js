@@ -9,7 +9,7 @@
     }
 
 
-	var onErrorLogout = function() {
+	var logout = function() {
 		// Error occured, so clear the cookie and redirect to login.html
 
 		$.cookie("username");
@@ -21,7 +21,7 @@
 	// Check cookie to confirm user session
 
 	if (!$.cookie("username") && !$.cookie("identity")) {
-		onErrorLogout();
+		logout();
 	} else {
         var identity = $.cookie("identity");
         if (identity == "student"
@@ -29,21 +29,23 @@
             || identity == "admin") {
             enableClass(identity);
         } else {
-            onErrorLogout();
+            logout();
         }
     }
 
 	getJson({
 		url : "/profile",
-		error : onErrorLogout,
+		error : logout,
 		callback : function(obj){
 
 			if (obj.err) {
 				alert(obj.err);
-				onErrorLogout();
+				logout();
 			}
 
-			// TODO: Display personal infomation
+            for (var attr in obj) {
+                $(".profile-" + attr).text(obj[attr]);
+            }
 
 		}
 	});
