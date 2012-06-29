@@ -57,6 +57,22 @@
     // Setup logout button
     $("#logout").click(logout);
 
+    var alertInternalError = function(alertElement, alertTextElement) {
+        alertFailure(alertElement, alertTextElement, "系统或网络异常");
+    }
+
+    var alertSuccess = function(alertElement, alertTextElement, text) {
+        alertElement.removeClass("alert-error");
+        alertTextElement.text(text);
+        alertElement.show("fast");
+    }
+
+    var alertFailure = function(alertElement, alertTextElement, text) {
+        alertElement.addClass("alert-error");
+        alertTextElement.text(text);
+        alertElement.show("fast");
+    }
+
     // professor add subject
     ajaxSubmit($("#addSubjectForm"), function() {
         postJson({
@@ -64,19 +80,13 @@
             data : $("#addSubjectForm").serialize(),
             callback : function(obj) {
                 if (obj.err) {
-                    $("#addSubjectAlertText").addClass("alert-error");
-                    $("#addSubjectAlertText").text(obj.err);
-                    $("#addSubjectAlert").show("fast");
+                    alertFailure($("#addSubjectAlert"), $("#addSubjectAlertText"), obj.err);
                 } else {
-                    $("#addSubjectAlertText").removeClass("alert-error");
-                    $("#addSubjectAlertText").text("成功");
-                    $("#addSubjectAlert").show("fast");
+                    alertSuccess($("#addSubjectAlert"), $("#addSubjectAlertText"), "成功添加课题");
                 }
             },
             error : function() {
-                $("#addSubjectAlertText").addClass("alert-error");
-                $("#addSubjectAlertText").text("系统或网络异常);
-                $("#addSubjectAlert").show("fast");
+                alertInternalError($("#addSubjectAlert"), $("#addSubjectAlertText"));
             }
         });
     });
