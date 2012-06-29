@@ -83,7 +83,14 @@
 
 
     ajaxSubmit($("#phaseControl"), function() {
-        // Dummy
+        postJson({
+            url : "/phase",
+            data : "",
+            callback : function(obj) {
+            },
+            error : function(obj) {
+            }
+        });
     });
 
 
