@@ -86,6 +86,49 @@
         alertElement.show("fast");
     }
 
+    // Change password logic
+    ajaxSubmit($("#changePasswordForm"), function() {
+        var username = $.cookie('username');
+        var oldPassword = $("#oldPassword").text();
+        var newPassword = $("#newPassword").text();
+        var confirmPassword = $("#confirmPassword").text();
+
+        if (newPassword != confirmPassword) {
+            alertFailure($("#changePasswordAlert"),
+                $("#changePasswordAlertText"),
+                "两次输入密码不一致");
+            return;
+        }
+
+        var oldHash = $.sha1(oldPassword + $.sha1(username));
+        var newHash = $.sha1(newPassword = $.sha1(username));
+        var postData = "password="
+                    + encodeURIComponent(oldPassword)
+                    + "&new_password="
+                    + encodeURIComponent(newPassword);
+
+        postJson({
+            url : "/chpasswd",
+            data : postData,
+            callback : function(obj) {
+                if (obj.err) {
+                    alertFailure($("#changePasswordAlert"),
+                        $("#changePasswordAlertText"),
+                        obj.err);
+                } else {
+                    alertSuccess($("#changePasswordAlert"),
+                        $("#changePasswordAlertText"),
+                        "修改成功");
+                }
+            },
+            error : function(obj) {
+                alertInternalError($("#changePasswordAlert"),
+                    $("#changePasswordAlertText"));
+            }
+
+        });
+    });
+
     // professor add subject
     ajaxSubmit($("#addSubjectForm"), function() {
         postJson({

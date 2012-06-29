@@ -76,29 +76,39 @@
           <div>
             <div class="nav-list-content">
               <div class="nav-list-pane fade in active" id="change-profile">
-                <form id="change-password-form" class="form-horizontal well">
+                <form id="changePasswordForm" class="form-horizontal well">
                   <legend>修改密码</legend>
                   <div class="control-group">
                     <label class="control-label">旧密码</label>
                     <div class="controls">
-                      <input class="input-xlarge focused" type="password"/>
+                      <input class="input-xlarge focused" type="password"
+                      id="oldPassword"/>
                     </div>
                   </div>
                   <div class="control-group">
                     <label class="control-label">新密码</label>
                     <div class="controls">
-                      <input class="input-xlarge focused" type="password"/>
+                      <input class="input-xlarge focused" type="password"
+                      id="newPassword"/>
                     </div>
                   </div>
                   <div class="control-group">
                     <label class="control-label">确认新密码</label>
                     <div class="controls">
-                      <input class="input-xlarge focused" type="password"/>
+                      <input class="input-xlarge focused" type="password"
+                      id="repeatPassword"/>
                     </div>
                   </div>
                   <div class="form-actions">
                     <button class="btn btn-primary" type="submit">提交</button>
                     <button class="btn">重置</button>
+                    <div class="alert fade in hide" id="changePasswordAlert" data-alert="alert">
+                      <a class="close" href="#">&times;</a>
+                      <p id="changePasswordAlertText"></p>
+                    </div>
+                    <div class="form-actions">
+                      <button class="btn btn-primary" type="submit" id="login">登录</button>
+                    </div>
                   </div>
                 </form>
 
