@@ -47,3 +47,12 @@ ul.nav-list li.nav-header {
     height: 90px;
     text-align: center;
 }
+
+.form-actions .btn {
+    margin-right: 10px;
+}
+
+.form-actions .alert {
+    margin-top: 18px;
+    margin-bottom: 0px;
+}
