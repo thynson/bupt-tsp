@@ -1,7 +1,7 @@
 
 html, body {
     font-size: 12px;
-    font-family: Tahoma, Helvetica, Arial, DejaVu Sans, sans-serif;
+    font-family: Tahoma, Helvetica, Arial, DejaVu Sans, 微软雅黑, sans-serif;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -33,6 +33,18 @@ table tr td label {
 
 table tr td {
     text-align: left;
+}
+
+.legend {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 27px;
+    font-size: 19.5px;
+    line-height: 36px;
+    color: #333;
+    border: 0;
+    border-bottom: 1px solid #E5E5E5;
 }
 
 #content {
