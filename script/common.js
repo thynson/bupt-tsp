@@ -66,4 +66,8 @@
 			e.preventDefault();
 		});
 	};
+
+    // Disable Text Selection on label and legend tags
+    $("label,legend").disableSelection();
+
 })($);
