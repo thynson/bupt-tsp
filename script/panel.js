@@ -76,20 +76,28 @@
     // Setup logout button
     $("#logout").click(logout);
 
-    var alertInternalError = function(alertElement, alertTextElement) {
-        alertFailure(alertElement, alertTextElement, "系统或网络异常");
+    var alertInternalError = function(alertElement) {
+        alertFailure(alertElement, "系统或网络异常");
     }
 
-    var alertSuccess = function(alertElement, alertTextElement, text) {
+    var alertSuccessAux = function(alertElement, alertTextElement, text) {
         alertElement.removeClass("alert-error");
         alertTextElement.text(text);
         alertElement.show("fast");
     }
 
-    var alertFailure = function(alertElement, alertTextElement, text) {
+    var alertFailureAux = function(alertElement, alertTextElement, text) {
         alertElement.addClass("alert-error");
         alertTextElement.text(text);
         alertElement.show("fast");
+    }
+
+    var alertFailure = function(alerter, text) {
+        alertFailureAux($(alerter), $(alerter + " .info"), text);
+    }
+
+    var alertSuccess = function(alerter, text) {
+        alertSuccessAux($(alerter), $(alerter + " .info"), text);
     }
 
     // Change password logic
@@ -100,9 +108,7 @@
         var confirmPassword = $("#confirmPassword").val();
 
         if (newPassword != confirmPassword) {
-            alertFailure($("#changePasswordAlert"),
-                $("#changePasswordAlertText"),
-                "两次输入密码不一致");
+            alertFailure("#changePasswordAlert", "两次输入密码不一致");
             return;
         }
 
@@ -118,18 +124,13 @@
             data : postData,
             callback : function(obj) {
                 if (obj.err) {
-                    alertFailure($("#changePasswordAlert"),
-                        $("#changePasswordAlertText"),
-                        obj.err);
+                    alertFailure("#changePasswordAlert", obj.err);
                 } else {
-                    alertSuccess($("#changePasswordAlert"),
-                        $("#changePasswordAlertText"),
-                        "修改成功");
+                    alertSuccess("#changePasswordAlert", "修改成功");
                 }
             },
             error : function(obj) {
-                alertInternalError($("#changePasswordAlert"),
-                    $("#changePasswordAlertText"));
+                alertInternalError("#changePasswordAlert");
             }
 
         });
@@ -142,13 +143,13 @@
             data : $("#addSubjectForm").serialize(),
             callback : function(obj) {
                 if (obj.err) {
-                    alertFailure($("#addSubjectAlert"), $("#addSubjectAlertText"), obj.err);
+                    alertFailure("#addSubjectAlert", obj.err);
                 } else {
-                    alertSuccess($("#addSubjectAlert"), $("#addSubjectAlertText"), "成功添加课题");
+                    alertSuccess("#addSubjectAlert", "成功添加课题");
                 }
             },
             error : function() {
-                alertInternalError($("#addSubjectAlert"), $("#addSubjectAlertText"));
+                alertInternalError("#addSubjectAlert");
             }
         });
     });
@@ -160,13 +161,13 @@
             data : "",
             callback : function(obj) {
                 if (obj.err) {
-                    alertFailure($("#phaseControlAlert"), $("#phaseControlAlertText"), obj.err);
+                    alertFailure("#phaseControlAlert", obj.err);
                 } else {
-                    alertSuccess($("#phaseControlAlert"), $("#phaseControlAlertText"), "成功进入下一阶段");
+                    alertSuccess("#phaseControlAlert", "成功进入下一阶段");
                 }
             },
             error : function(obj) {
-                alertInternalError($("#phaseControlAlert"), $("#phaseControlAlertText"));
+                alertInternalError("#phaseControlAlert");
             }
         });
     });
