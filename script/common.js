@@ -30,6 +30,7 @@
     $("div.alert a.close").each(function(i, x){
         $(x).click(function(){
             $(x).parent().hide("fast");
+            return false;
         });
     });
 
