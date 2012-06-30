@@ -22,7 +22,7 @@
             <ul class="well nav nav-list">
               <li class="nav-header">导航</li>
 
-              <li class="active"><a data-toggle="nav-list" href="#change-profile"><i class="icon-user"></i>修改资料</a></li>
+              <li class="active"><a data-toggle="nav-list" href="#my-profile"><i class="icon-user"></i>个人资料</a></li>
               <li class="Student"><a data-toggle="nav-list" href="#subject"><i class="icon-flag"></i>查看选择课题</a></li>
               <li class="Professor"><a data-toggle="nav-list" href="#my-subject"><i class="icon-plus-sign"></i>我的课题</a></li>
               <li class="Professor"><a data-toggle="nav-list" href="#student"><i class="icon-ok"></i>查看选择学生</a></li>
@@ -33,52 +33,6 @@
               <li class="divider"></li>
 
               <li><a id="logout" href="#"><i class="icon-off"></i>登出</a></li>
-              <li class="nav-header hide">个人信息</li>
-              <li>
-              <table class="Student hide table">
-                <tr>
-                  <td><div>学号</div></td>
-                  <td class="profile-id"></td>
-                </tr>
-
-                <tr>
-                  <td><div>姓名</div></td>
-                  <td class="profile-name"></td>
-                </tr>
-
-                <tr>
-                  <td><div>班级</div></td>
-                  <td class="profile-class"></td>
-                </tr>
-
-                <tr>
-                  <td><div>序号</div></td>
-                  <td class="profile-order"></td>
-                </tr>
-              </table>
-
-              <table class="Professor hide">
-                <tr>
-                  <td><div>姓名</div></td>
-                  <td class="profile-name"></td>
-                </tr>
-
-                <tr>
-                  <td><div>职称</div></td>
-                  <td class="profile-title"></td>
-                </tr>
-
-                <tr>
-                  <td><div>工作证号</div></td>
-                  <td class="profile-id"></td>
-                </tr>
-
-                <tr>
-                  <td><div>研究方向</div></td>
-                  <td class="profile-class"></td>
-                </tr>
-              </table>
-              </li>
 
               <li class="divider"></li>
 
@@ -91,7 +45,67 @@
         <div class="span9 columns">
           <div>
             <div class="nav-list-content">
-              <div class="nav-list-pane fade in active" id="change-profile">
+              <div class="nav-list-pane fade in active" id="my-profile">
+                <form id="profile" class="Student Professor hide form-horizontal">
+                  <legend>个人信息</legend>
+
+                  <div class="Student">
+                    <div class="control-group">
+                      <label class="control-label">姓名</label>
+                      <div class="controls">
+                        <label class="profile-name"></label>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">学号</label>
+                      <div class="controls">
+                        <label class="profile-id"></label>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">班级</label>
+                      <div class="controls">
+                        <label class="profile-class"></label>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">班内序号</label>
+                      <div class="controls">
+                        <label class="profile-order"></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="Professor hide">
+                    <div class="control-group">
+                      <label class="control-label">姓名</label>
+                      <div class="controls">
+                        <label class="profile-name"></label>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">职称</label>
+                      <div class="controls">
+                        <label class="profile-title"></label>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">工作证号</label>
+                      <div class="controls">
+                        <label class="profile-id"></label>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">研究方向</label>
+                      <div class="controls">
+                        <label class="profile-field"></label>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+
+
                 <form id="changePasswordForm" class="form-horizontal">
                   <legend>修改密码</legend>
                   <div class="control-group">
@@ -125,7 +139,7 @@
                   </div>
                 </form>
 
-                <form id="upload-resume" class="student hide form-horizontal">
+                <form id="upload-resume" class="Student Professor hide form-horizontal">
                   <legend>上传简历</legend>
                   <div class="control-group">
                     <label class="control-label">选择文件</label>

@@ -63,3 +63,8 @@ table tr td {
 .nav-list li i {
     margin-right: 10px !important;
 }
+
+.form-horizontal .controls label {
+    padding-top: 5px;
+    padding-left: 10px;
+}
