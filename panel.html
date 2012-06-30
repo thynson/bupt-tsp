@@ -147,59 +147,59 @@
               <div class="nav-list-pane fade " id="my-subject">
                 <legend>我的课题</legend>
                 <div>
+                  <button class="btn btn-primary"
+                    id="add-subject">新增课题</button>
                   <ul id="subject-list">
 
                   </ul>
                 </div>
-                <div id="subject-detail" class="hide">
-                  <form class="form-horizontal" id="addSubjectForm">
-                    <fieldset>
-                      <div class="control-group">
-                        <label class="control-label">课题名</label>
-                        <div class="controls">
-                          <input class="input-xlarge focused" type="text"
-                          name="title"/>
-                        </div>
+                <form id="subject-form" class="form-horizontal hide">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label">课题名</label>
+                      <div class="controls">
+                        <input class="input-xlarge focused" type="text"
+                        name="title"/>
                       </div>
-                      <div class="control-group">
-                        <label class="control-label">课题描述</label>
-                        <div class="controls">
-                          <textarea class="focused textarea" type="text"
-                          name="desc"></textarea>
-                        </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">课题描述</label>
+                      <div class="controls">
+                        <textarea class="focused textarea" type="text"
+                        name="desc"></textarea>
                       </div>
-                      <div class="control-group">
-                        <label class="control-label">题目分类一</label>
-                        <div class="controls">
-                          <!-- name="type1" 工程实践 研究设计 理论分析 -->
-                        </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">题目分类一</label>
+                      <div class="controls">
+                        <!-- name="type1" 工程实践 研究设计 理论分析 -->
                       </div>
-                      <div class="control-group">
-                        <label class="control-label">题目分类二</label>
-                        <div class="controls">
-                          <!-- name="type2" 硬件 软件 软硬结合 非软硬件 -->
-                        </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">题目分类二</label>
+                      <div class="controls">
+                        <!-- name="type2" 硬件 软件 软硬结合 非软硬件 -->
                       </div>
-                      <div class="control-group">
-                        <label class="control-label">题目来源</label>
-                        <div class="controls">
-                          <!-- name="source" 创新项目 教师课题 其他 -->
-                        </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">题目来源</label>
+                      <div class="controls">
+                        <!-- name="source" 创新项目 教师课题 其他 -->
                       </div>
+                    </div>
 
-                      <div class="form-actions">
-                        <button class="btn btn-primary" type="submit">提交</button>
-                        <button class="btn">重置</button>
-                        <button class="btn close">关闭</button>
-                        <div class="alert fade in hide"
-                          data-alert="alert" id="addSubjectAlert">
-                          <a class="close" href="#">&times</a>
-                          <p class="info"><p>
-                        </div>
+                    <div class="form-actions">
+                      <button class="btn btn-primary" type="submit">提交</button>
+                      <button class="btn">重置</button>
+                      <button class="btn close-form">关闭</button>
+                      <div class="alert fade in hide"
+                        data-alert="alert" id="subjectFormAlert">
+                        <a class="close" href="#">&times</a>
+                        <p class="info"><p>
                       </div>
-                    </fieldset>
-                  </form>
-                </div>
+                    </div>
+                  </fieldset>
+                </form>
               </div>
 
               <div class="nav-list-pane fade" id="student">

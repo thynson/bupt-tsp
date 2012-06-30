@@ -49,10 +49,32 @@
 
 
     // Close the subject detail form
-    $('#subject-detail .form-actions>.close').click(function(){
-        $('#subject-detail').hide("fast");
+    $('#subject-form button.close-form').click(function(){
+        $('#subject-form').hide("fast");
     });
 
+    $("#add-subject").click(function () {
+        // professor add or modify subject
+        $("#subject-form").show("fast");
+        ajaxSubmit($("#subject-form"), function() {
+            postJson({
+                url : "/add",
+                data : $("#subject-form").serialize(),
+                callback : function(obj) {
+                    if (obj.err) {
+                        alertFailure("#subjectFormAlert", obj.err);
+                    } else {
+                        alertSuccess("#subjectFormAlert", "成功增加课题");
+                    }
+                },
+                error : function() {
+                    alertInternalError("#subjectFormAlert");
+                }
+            });
+        });
+    });
+
+    // Get the subject detail
     getJson({
         url : "/subject",
         error : function(){},
@@ -61,21 +83,46 @@
             } else {
                 obj.subject.forEach(function(s){
                     var li = $("<li/>")
+
+                    // Click to show subject form
                     $("<a/>").click(function(){
                         // Set title
-                        $('#subject-detail input[name="title"]').text();
+                        $('#subject-form input[name="title"]').text();
 
                         // Set desc
-                        $('#subject-detail textarea[name="desc"]').text();
+                        $('#subject-form textarea[name="desc"]').text();
 
                         // TODO: type1 type2 source
 
-                        $("#subject-detail").show("fast");
+                        $("#subject-form").show("fast");
+
+                        var postdata = "id=" + s.id + "&" + $("#subject-form").serialize();
+
+                        // professor add or modify subject
+                        ajaxSubmit($("#subject-form"), function() {
+                            postJson({
+                                url : "/modify",
+                                data : postdata,
+                                callback : function(obj) {
+                                    if (obj.err) {
+                                        alertFailure("#subjectFormAlert", obj.err);
+                                    } else {
+                                        alertSuccess("#subjectFormAlert", "更新成功");
+                                    }
+                                },
+                                error : function() {
+                                    alertInternalError("#subjectFormAlert");
+                                }
+                            });
+                        });
                     }).appendTo(li);
                 });
             }
         }
     });
+
+
+
 
     var updatePhase = function(){
         getJson({
@@ -126,24 +173,6 @@
                 alertInternalError("#changePasswordAlert");
             }
 
-        });
-    });
-
-    // professor add subject
-    ajaxSubmit($("#addSubjectForm"), function() {
-        postJson({
-            url : "/add",
-            data : $("#addSubjectForm").serialize(),
-            callback : function(obj) {
-                if (obj.err) {
-                    alertFailure("#addSubjectAlert", obj.err);
-                } else {
-                    alertSuccess("#addSubjectAlert", "成功添加课题");
-                }
-            },
-            error : function() {
-                alertInternalError("#addSubjectAlert");
-            }
         });
     });
 
