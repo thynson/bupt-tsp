@@ -145,9 +145,9 @@
         var username = $.cookie('username');
         var oldPassword = $("#oldPassword").val();
         var newPassword = $("#newPassword").val();
-        var confirmPassword = $("#confirmPassword").val();
+        var repeatPassword = $("#repeatPassword").val();
 
-        if (newPassword != confirmPassword) {
+        if (newPassword != repeatPassword) {
             alertFailure("#changePasswordAlert", "两次输入密码不一致");
             return;
         }
