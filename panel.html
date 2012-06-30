@@ -15,27 +15,26 @@
       <div id="banner">
       </div>
 
-      <hr/>
-
       <div id="content" class="row">
         <div class="span3 columns">
-          <div >
+          <div class="">
 
-            <ul class="nav nav-list">
+            <ul class="well nav nav-list">
               <li class="nav-header">导航</li>
 
-              <li class="active"><a data-toggle="nav-list" href="#change-profile">修改资料</a></li>
-              <li><a data-toggle="nav-list" href="#view-subject">查看课题</a></li>
-              <li class="Professor"><a data-toggle="nav-list" href="#add-subject">增加课题</a></li>
-              <li><a data-toggle="nav-list" href="#view-student">查看学生</a></li>
-              <li class="Admin"><a data-toggle="nav-list" href="#system-admin">系统管理</a></li>
-              <li class="Admin"><a data-toggle="nav-list" href="#match-student">调节学生</a></li>
+              <li class="active"><a data-toggle="nav-list" href="#change-profile"><i class="icon-user"></i>修改资料</a></li>
+              <li class="Student"><a data-toggle="nav-list" href="#subject"><i class="icon-flag"></i>查看选择课题</a></li>
+              <li class="Professor"><a data-toggle="nav-list" href="#add-subject"><i class="icon-plus-sign"></i>增加课题</a></li>
+              <li class="Professor"><a data-toggle="nav-list" href="#student"><i class="icon-ok"></i>查看选择学生</a></li>
+              <li class="Admin"><a data-toggle="nav-list" href="#system-admin"><i class="icon-wrench"></i>系统管理</a></li>
+              <li class="Admin"><a data-toggle="nav-list" href="#match-student"><i class="icon-leaf"></i>调剂学生</a></li>
 
 
+              <li class="divider"></li>
 
               <li class="nav-header hide">个人信息</li>
               <li>
-              <table class="Student hide table well">
+              <table class="Student hide table">
                 <tr>
                   <td><div>学号</div></td>
                   <td class="profile-id"></td>
@@ -81,8 +80,10 @@
               <center><button class="btn" id="logout">登出</button></center>
               </li>
 
+              <li class="divider"></li>
+
               <li class="nav-header">公告</li>
-              <div class="well strong">系统调试中</div>
+              <div class="strong">系统调试中</div>
             </ul>
           </div>
         </div>
@@ -140,7 +141,7 @@
                 </form>
               </div>
 
-              <div class="nav-list-pane fade well" id="view-subject">
+              <div class="nav-list-pane fade well" id="subject">
               </div>
 
               <div class="nav-list-pane fade well" id="add-subject">
@@ -191,7 +192,7 @@
                 </form>
               </div>
 
-              <div class="nav-list-pane fade well" id="view-student">
+              <div class="nav-list-pane fade well" id="student">
 
               </div>
 

@@ -35,11 +35,6 @@ table tr td {
     text-align: left;
 }
 
-
-ul.nav-list li.nav-header {
-    padding-left: 5px;
-}
-
 #content {
     padding-bottom: 90px;
 }
@@ -59,4 +54,12 @@ ul.nav-list li.nav-header {
 .form-actions .alert {
     margin-top: 18px;
     margin-bottom: 0px;
+}
+
+.nav-list li.active i {
+    background-image: url("../img/glyphicons-halflings-white.png");
+}
+
+.nav-list li i {
+    margin-right: 10px !important;
 }
