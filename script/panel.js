@@ -130,7 +130,7 @@
                 $("<p/>").text("报选学生：").appendTo(infoTd);
                 var ul = $("<ul/>").appendTo(infoTd);
 
-                s.selected_by.forEach(function(s) {
+                $.each(s.selected_by, function(i, s) {
                     $("<li/>").text(s.realname).appendTo(ul);
                 });
 
@@ -170,7 +170,9 @@
             callback : function(obj) {
                 if (obj.err) {
                 } else {
-                    obj.subject.forEach(processSubject);
+                    $.each(obj.subject, function(i, s){
+                        processSubject(s);
+                    });
                 }
             }
         });
