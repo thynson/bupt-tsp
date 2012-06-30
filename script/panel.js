@@ -8,20 +8,20 @@
     }
 
 
-	var logout = function() {
-		// Error occured, so clear the cookie and redirect to login.html
+    var logout = function() {
+        // Error occured, so clear the cookie and redirect to login.html
 
-		$.cookie("username");
-		$.cookie("identity");
+        $.cookie("username");
+        $.cookie("identity");
 
-		location.href = "/login.html";
-	}
+        location.href = "/login.html";
+    }
 
-	// Check cookie to confirm user session
+    // Check cookie to confirm user session
 
-	if (!$.cookie("username") && !$.cookie("identity")) {
-		logout();
-	} else {
+    if (!$.cookie("username") && !$.cookie("identity")) {
+        logout();
+    } else {
         var identity = $.cookie("identity");
         if (identity) {
             enableClass(identity);
@@ -29,23 +29,6 @@
             logout();
         }
     }
-
-	getJson({
-		url : "/profile",
-		error : logout,
-		callback : function(obj){
-
-			if (obj.err) {
-				alert(obj.err);
-				logout();
-			}
-
-            for (var attr in obj) {
-                $(".profile-" + attr).text(obj[attr]);
-            }
-
-		}
-	});
 
 
     // Close the subject detail form
@@ -76,52 +59,144 @@
     });
 
     // Get the subject detail
-    getJson({
-        url : "/subject",
-        error : function(){},
-        callback : function(obj) {
-            if (obj.err) {
-            } else {
-                obj.subject.forEach(function(s){
-                    var li = $("<li/>")
+    var getSubjectDetail = function(){
 
-                    // Click to show subject form
-                    $("<a/>").click(function(){
-                        // Set title
-                        $('#subject-form input[name="title"]').text();
+        // Clear the first
 
-                        // Set desc
-                        $('#subject-form textarea[name="desc"]').text();
+        $("#subject-list").empty();
+        $("#subject-table").empty();
 
-                        // TODO: type1 type2 source
+        var processSubject = function(s){
 
-                        $("#subject-form").show("fast");
+            //
+            // Add a entry for subject list
+            //
+            var li = $("<li/>").appendTo($("#subject-list"));
+            $("<a/>").click(function(){
+                // Set title
+                $('#subject-form input[name="title"]').text(s.name);
 
-                        var postdata = "id=" + s.id + "&" + $("#subject-form").serialize();
+                // Set desc
+                $('#subject-form textarea[name="desc"]').text(s.desc);
 
-                        // professor add or modify subject
-                        ajaxSubmit($("#subject-form"), function() {
-                            postJson({
-                                url : "/modify",
-                                data : postdata,
-                                callback : function(obj) {
-                                    if (obj.err) {
-                                        alertFailure("#subjectFormAlert", obj.err);
-                                    } else {
-                                        alertSuccess("#subjectFormAlert", "更新成功");
-                                    }
-                                },
-                                error : function() {
-                                    alertInternalError("#subjectFormAlert");
-                                }
-                            });
-                        });
-                    }).appendTo(li);
+                // TODO: type1 type2 source
+
+                $("#subject-form").show("fast");
+
+                var postdata = "id=" + s.id + "&" + $("#subject-form").serialize();
+
+                // professor add or modify subject
+                ajaxSubmit($("#subject-form"), function() {
+                    postJson({
+                        url : "/modify",
+                        data : postdata,
+                        callback : function(obj) {
+                            if (obj.err) {
+                                alertFailure("#subjectFormAlert", obj.err);
+                            } else {
+                                alertSuccess("#subjectFormAlert", "更新成功");
+                            }
+                        },
+                        error : function() {
+                            alertInternalError("#subjectFormAlert");
+                        }
+                    });
                 });
+            }).appendTo(li);
+
+            //
+            // Add a entry for table
+            //
+            var tr = $("<tr/>").appendTo("#subject-table");
+            var infoTd = $("<td/>")
+                .addClass("hide")
+                .attr("colspan", "255")
+                .appendTo($("<tr/>").appendTo("#subject-table"));
+
+            $("<td/>").text(s.name).appendTo(tr);
+            $("<td/>").text(s.desc).appendTo(tr);
+            $("<td/>").text(s.professor.realname).appendTo(tr);
+            $("<td/>").text(s.type1).appendTo(tr);
+            $("<td/>").text(s.type2).appendTo(tr);
+            $("<td/>").text(s.source).appendTo(tr);
+            var td = $("<td/>").appendTo(tr);
+
+            if (s.selected_by) {
+
+                var toggle = $("<button/>").addClass("btn").click(function(){
+                    infoTd.toggleClass("show");
+                }).text("查看选课学生").appendTo(td);
+
+                $("<p/>").text("报选学生：").appendTo(infoTd);
+                var ul = $("<ul/>").appendTo(infoTd);
+
+                s.selected_by.forEach(function(s) {
+                    $("<li/>").text(s.realname).appendTo(ul);
+                });
+
+                var selectButton = $("<button/>").addClass("btn").click(function(s) {
+                    postJson({
+                        url : "/select",
+                        data : "subject=" + encodeURIComponent(s.id),
+                        callback : function (obj) {
+                            if (obj.err) {
+                            } else {
+                                getSubjectDetail();
+                            }
+                        },
+                        error : function(){
+                        }
+                    });
+                }).appendTo(td);
+
+                if (profile.selectedSubject && profile.selectedSubject == s.id) {
+                    selectButton.text("已报选").attr("disabled", "disabled").addClass("disabled");
+                } else {
+                    selectButton.text("报选");
+                }
+
+            } else if (s.applied_to) {
+                $("<p/>").text("已选学生：").appendTo(td);
+                $("<div/>").text(s.applied_to.realname);
+            } else {
+
             }
         }
-    });
 
+        getJson({
+            url : "/subject",
+            error : function(){
+            },
+            callback : function(obj) {
+                if (obj.err) {
+                } else {
+                    obj.subject.forEach(processSubject);
+                }
+            }
+        });
+    };
+
+
+    var profile;
+    getJson({
+        url : "/profile",
+        error : logout,
+        callback : function(obj){
+
+            if (obj.err) {
+                alert(obj.err);
+                logout();
+            }
+            profile = obj;
+
+            for (var attr in obj) {
+                $(".profile-" + attr).text(obj[attr]);
+            }
+
+            getSubjectDetail();
+
+        }
+    });
 
 
 
@@ -156,9 +231,9 @@
         var oldHash = $.sha1(oldPassword + $.sha1(username));
         var newHash = $.sha1(newPassword = $.sha1(username));
         var postData = "password="
-                    + encodeURIComponent(oldPassword)
-                    + "&new_password="
-                    + encodeURIComponent(newPassword);
+        + encodeURIComponent(oldPassword)
+        + "&new_password="
+        + encodeURIComponent(newPassword);
 
         postJson({
             url : "/chpasswd",
