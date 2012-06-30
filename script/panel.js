@@ -47,6 +47,36 @@
 		}
 	});
 
+
+    // Close the subject detail form
+    $('#subject-detail .form-actions>.close').click(function(){
+        $('#subject-detail').hide("fast");
+    });
+
+    getJson({
+        url : "/subject",
+        error : function(){},
+        callback : function(obj) {
+            if (obj.err) {
+            } else {
+                obj.subject.forEach(function(s){
+                    var li = $("<li/>")
+                    $("<a/>").click(function(){
+                        // Set title
+                        $('#subject-detail input[name="title"]').text();
+
+                        // Set desc
+                        $('#subject-detail textarea[name="desc"]').text();
+
+                        // TODO: type1 type2 source
+
+                        $("#subject-detail").show("fast");
+                    }).appendTo(li);
+                });
+            }
+        }
+    });
+
     var updatePhase = function(){
         getJson({
             url : "/phase",
