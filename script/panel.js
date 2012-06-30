@@ -23,9 +23,7 @@
 		logout();
 	} else {
         var identity = $.cookie("identity");
-        if (identity == "student"
-            || identity == "professor"
-            || identity == "admin") {
+        if (identity) {
             enableClass(identity);
         } else {
             logout();

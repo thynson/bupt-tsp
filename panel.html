@@ -25,9 +25,9 @@
               <li class="nav-header">导航</li>
 
               <li class="active"><a data-toggle="nav-list" href="#change-profile">修改资料</a></li>
-              <li class="Student"><a data-toggle="nav-list" href="#select-subject">选择课题</a></li>
+              <li><a data-toggle="nav-list" href="#view-subject">查看课题</a></li>
               <li class="Professor"><a data-toggle="nav-list" href="#add-subject">增加课题</a></li>
-              <li class="Professor"><a data-toggle="nav-list" href="#select-student">选择学生</a></li>
+              <li><a data-toggle="nav-list" href="#view-student">查看学生</a></li>
               <li class="Admin"><a data-toggle="nav-list" href="#system-admin">系统管理</a></li>
               <li class="Admin"><a data-toggle="nav-list" href="#match-student">调节学生</a></li>
 
@@ -47,8 +47,13 @@
                 </tr>
 
                 <tr>
+                  <td><div>班级</div></td>
+                  <td class="profile-class"></td>
+                </tr>
+
+                <tr>
                   <td><div>序号</div></td>
-                  <td id="profile-order"></td>
+                  <td class="profile-order"></td>
                 </tr>
               </table>
 
@@ -60,7 +65,17 @@
 
                 <tr>
                   <td><div>职称</div></td>
-                  <td id="profile-class"></td>
+                  <td class="profile-title"></td>
+                </tr>
+
+                <tr>
+                  <td><div>工作证号</div></td>
+                  <td class="profile-id"></td>
+                </tr>
+
+                <tr>
+                  <td><div>研究方向</div></td>
+                  <td class="profile-class"></td>
                 </tr>
               </table>
               <center><button class="btn" id="logout">登出</button></center>
@@ -125,8 +140,7 @@
                 </form>
               </div>
 
-              <div class="nav-list-pane fade well" id="select-subject">
-
+              <div class="nav-list-pane fade well" id="view-subject">
               </div>
 
               <div class="nav-list-pane fade well" id="add-subject">
@@ -145,6 +159,25 @@
                         <textarea class="focused textarea" type="text"></textarea>
                       </div>
                     </div>
+                    <div class="control-group">
+                      <label class="control-label">题目分类一</label>
+                      <div class="controls">
+                        <!-- 工程实践 研究设计 理论分析 -->
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">题目分类二</label>
+                      <div class="controls">
+                        <!-- 硬件 软件 软硬结合 非软硬件 -->
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">题目来源</label>
+                      <div class="controls">
+                        <!-- 创新项目 教师课题 其他 -->
+                      </div>
+                    </div>
+
                     <div class="form-actions">
                       <button class="btn btn-primary" type="submit">提交</button>
                       <button class="btn">重置</button>
@@ -158,7 +191,7 @@
                 </form>
               </div>
 
-              <div class="nav-list-pane fade well" id="select-student">
+              <div class="nav-list-pane fade well" id="view-student">
 
               </div>
 
