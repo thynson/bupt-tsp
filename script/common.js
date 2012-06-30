@@ -3,6 +3,29 @@
     var phaseText = function(num) {
     }
 
+    var alertSuccessAux = function(alertElement, alertTextElement, text) {
+        alertElement.removeClass("alert-error");
+        alertTextElement.text(text);
+        alertElement.show("fast");
+    }
+
+    var alertFailureAux = function(alertElement, alertTextElement, text) {
+        alertElement.addClass("alert-error");
+        alertTextElement.text(text);
+        alertElement.show("fast");
+    }
+
+    alertFailure = function(alerter, text) {
+        alertFailureAux($(alerter), $(alerter + " .info"), text);
+    }
+
+    alertSuccess = function(alerter, text) {
+        alertSuccessAux($(alerter), $(alerter + " .info"), text);
+    }
+
+    alertInternalError = function(alertElement) {
+        alertFailure(alertElement, "系统或网络异常");
+    }
 
     $("div.alert a.close").each(function(i, x){
         $(x).click(function(){

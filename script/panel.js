@@ -62,33 +62,8 @@
 
     updatePhase();
 
-
     // Setup logout button
     $("#logout").click(logout);
-
-    var alertInternalError = function(alertElement) {
-        alertFailure(alertElement, "系统或网络异常");
-    }
-
-    var alertSuccessAux = function(alertElement, alertTextElement, text) {
-        alertElement.removeClass("alert-error");
-        alertTextElement.text(text);
-        alertElement.show("fast");
-    }
-
-    var alertFailureAux = function(alertElement, alertTextElement, text) {
-        alertElement.addClass("alert-error");
-        alertTextElement.text(text);
-        alertElement.show("fast");
-    }
-
-    var alertFailure = function(alerter, text) {
-        alertFailureAux($(alerter), $(alerter + " .info"), text);
-    }
-
-    var alertSuccess = function(alerter, text) {
-        alertSuccessAux($(alerter), $(alerter + " .info"), text);
-    }
 
     // Change password logic
     ajaxSubmit($("#changePasswordForm"), function() {
