@@ -51,6 +51,7 @@
     // Close the subject detail form
     $('#subject-form button.close-form').click(function(){
         $('#subject-form').hide("fast");
+        return false;
     });
 
     $("#add-subject").click(function () {
