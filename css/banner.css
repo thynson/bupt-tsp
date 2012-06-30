@@ -1,0 +1,23 @@
+
+html, body {
+    min-width: 315px;
+}
+
+#banner {
+    width: 600px;
+    height: 130px;
+    margin: 20px auto 20px auto ;
+    background: url("/img/banner-bg.png") no-repeat;
+}
+
+@media (max-width: 600px) {
+
+#banner {
+    width: 315px;
+    height: 173px;
+    margin: 20px auto 20px auto ;
+    background: url("/img/banner-bg-315.png") no-repeat;
+}
+
+}
+
