@@ -138,4 +138,22 @@
     });
 
 
+    ajaxSubmit($("#issuceAnnounce"), function() {
+        postJson({
+            url : "/announce",
+            data : $("#issuceAnnounce").serialize(),
+            callback : function(obj) {
+                if (obj.err) {
+                    alertFailure("#issuceAnnounceAlert", obj.err);
+                } else {
+                    alertSuccess("#issuceAnnounceAlert", "公告已发布");
+                }
+            },
+            error : function(obj) {
+                alterInternalError("#issuceAnnounceAlert");
+            }
+        });
+    });
+
+
 })($);
