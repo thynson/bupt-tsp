@@ -1,7 +1,7 @@
 
 html, body {
     font-size: 12px;
-    font-family: Tahoma, Helvetica, Arial, DejaVu Sans, 微软雅黑, sans-serif;
+    font-family: Tahoma, Helvetica, Arial, DejaVu Sans, sans-serif;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -79,4 +79,8 @@ table tr td {
 .form-horizontal .controls label {
     padding-top: 5px;
     padding-left: 10px;
+}
+
+textarea {
+    min-height: 176px;
 }
