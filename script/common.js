@@ -1,5 +1,16 @@
 ;(function($){
 
+    var phaseText = function(num) {
+    }
+
+
+    $("div.alert a.close").each(function(i, x){
+        $(x).click(function(){
+            $(x).parent().hide("fast");
+        });
+    });
+
+
 	postJson = function(params) {
 		return $.ajax({
 			type : "POST",

@@ -1,9 +1,5 @@
 
 ;(function($){
-    $(".close").click(function(){
-        $(".alert").hide("fast");
-    });
-
     var errHandler = function() {
         $("#alertText").text("系统异常，请检查您的网络连接或联系管理员");
         $(".alert").show("fast");
