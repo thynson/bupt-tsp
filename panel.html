@@ -257,8 +257,6 @@
               </div>
 
               <div class="nav-list-pane fade" id="student">
-                <div class="legend">查看选择学生</div>
-
 
               </div>
 
@@ -333,9 +331,32 @@
                   </fieldset>
                 </form>
 
-                <div class="">
-                  <div class="legend">查看选课情况</div>
-                </div>
+                <form class="form-horizontal" id="importData">
+                  <div class="legend">导入数据</div>
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label">学生数据</label>
+                      <div class="controls">
+                        <input type="file" name="student"/>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label">导师数据</label>
+                      <div class="controls">
+                        <input type="file" name="professor"/>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <button class="btn btn-primary" type="submit">提交</button>
+                      <button class="btn" type="reset">重置</button>
+                      <div class="alert fade in hide" data-alert="alert"
+                        id="importDataAlter">
+                        <a class="close" href="#">&times</a>
+                        <p class="info"><p>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
 
               </div>
 

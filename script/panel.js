@@ -151,10 +151,7 @@
 
         }
 
-        var processSubject = function(s){
-
-            addToMySubject(s);
-
+        var addToSubjectTable = function(s) {
             //
             // Add a entry for table
             //
@@ -251,6 +248,14 @@
             }
 
             $("<td/>").append(statusbtn).addClass("subject-state").appendTo(tr);
+        }
+
+
+        var processSubject = function(s){
+
+            addToMySubject(s);
+
+            addToSubjectTable(s);
         }
 
         getJson({
@@ -376,6 +381,23 @@
             },
             error : function(obj) {
                 alterInternalError("#issuceAnnounceAlert");
+            }
+        });
+    });
+
+    ajaxSubmit($("#importData"), function() {
+        postJson({
+            url : "/import",
+            data : $("#importData").serialize(),
+            callback : function(obj) {
+                if (obj.err) {
+                    alertFailure("#importDataAlter", obj.err);
+                } else {
+                    alertSuccess("#importDataAlter", "导入完成");
+                }
+            },
+            error : function(obj) {
+                alertInternalError("#importDataAlter");
             }
         });
     });
