@@ -151,36 +151,56 @@
 
         }
 
+        Harvey.attach('(max-width:980px)', {
+            setup: function(){}, 
+            on: function(){
+                $("#subject-select-table").attr("extra-span", "3");
+                $("#subject-select-table .extra td").attr("colspan", 3);
+            },
+            off: function(){}
+        });
+
+        Harvey.attach('(min-width:979px)', {
+            setup: function(){}, 
+            on: function(){
+                $("#subject-select-table").attr("extra-span", "6");
+                $("#subject-select-table .extra td").attr("colspan", 6);
+            }, 
+            off: function(){}
+        });
+
         var addToSubjectTable = function(s) {
+
             //
             // Add a entry for table
             //
             var tr = $("<tr/>").appendTo("#subject-table")
             .addClass("subject-item")
-            .append($("<td/>").text(s.name))
+            .append($("<td/>").text(s.name)).addClass("subject-title")
             .append($("<td/>").append($("<a/>").text(s.professor.realname).attr("href", "#" + s.professor.username)
                     .click(function(){
                         // TODO Open the profile of the professor
                         return false;
                     })))
-            .append($("<td/>").text(s.type1))
-            .append($("<td/>").text(s.type2))
-            .append($("<td/>").text(s.source))
+                    .addClass("subject-professor")
+            .append($("<td/>").text(s.type1).addClass("visible-desktop subject-type1"))
+            .append($("<td/>").text(s.type2).addClass("visible-desktop subject-type2"))
+            .append($("<td/>").text(s.source).addClass("visible-desktop subject-source"))
             .click(function(){
                 $(this).next().toggle("fast").next().toggle("fast");
             });
 
             $("#subject-table").append(
-                $("<tr/>").addClass("extra hide")
-                .append($("<td/>").attr("colspan", 6)
+                $("<tr/>").addClass("extra subject-desc hide")
+                .append($("<td/>").attr("colspan", $("#subject-select-table").attr("extra-span"))
                     .append($("<h4/>").text("课题描述"))
                     .append($("<p/>").text(s.desc)))
             );
 
             var selcon = $("<p/>").appendTo(
-                    ($("<td/>").attr("colspan", 6)
+                    ($("<td/>").attr("colspan", $("#subject-select-table").attr("extra-span"))
                         .append($("<h4/>").text("选课情况")))
-                    .appendTo($("<tr/>").addClass("extra hide")
+                    .appendTo($("<tr/>").addClass("extra subject-cond hide")
                     .appendTo("#subject-table")));
 
             var statusbtn = $("<button/>").addClass('btn').attr("type","button");
