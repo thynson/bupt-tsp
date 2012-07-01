@@ -77,7 +77,7 @@
 
             postJson({
                 url : "/add",
-                data : $("#subject-form").serialize(),
+                data : postdata,
                 callback : function(obj) {
                     if (obj.err) {
                         alertFailure("#subjectFormAlert", obj.err);
