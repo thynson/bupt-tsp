@@ -83,6 +83,7 @@
                         alertFailure("#subjectFormAlert", obj.err);
                     } else {
                         alertSuccess("#subjectFormAlert", "成功增加课题");
+                        $('#subject-form').hide("fast");
                         // TODO Update the subject-table
                     }
                 },
