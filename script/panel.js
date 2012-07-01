@@ -11,8 +11,8 @@
     var logout = function() {
         // Error occured, so clear the cookie and redirect to login.html
 
-        $.cookie("username");
-        $.cookie("role");
+        $.cookie("username", null);
+        $.cookie("role", null);
 
         location.href = "/login.html";
     }
@@ -430,7 +430,7 @@
                 if (obj.err) {
                     alertFailure("#phaseControlAlert", obj.err);
                 } else {
-                    alertSuccess("#phaseControlAlert", "成功进入下一阶段");
+                    logout();
                 }
             },
             error : function(obj) {
