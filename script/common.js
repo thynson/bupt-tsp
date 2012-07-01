@@ -63,6 +63,7 @@
 			try {
 				callback();
 			} catch(err) {
+                alert(err);
 			}
 			e.preventDefault();
 		});

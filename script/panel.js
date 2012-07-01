@@ -465,7 +465,7 @@
     ajaxSubmit($('#resetDatabase'), function() {
         var password = $('#resetDatabase input[type="password"]').val()
         var hash = $.sha1(password + $.sha1($.cookie('username')));
-        var postadata = "password=" + encodeURIComponent(hash);
+        var postdata = "password=" + encodeURIComponent(hash);
         postJson({
             url : "/reset",
             data : postdata,
