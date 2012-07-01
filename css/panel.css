@@ -1,3 +1,7 @@
 textarea.textarea {
     width: 80%;
 }
+
+.subject-item td.subject-state {
+    text-align: center;
+}

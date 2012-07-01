@@ -157,33 +157,51 @@
             //
             // Add a entry for table
             //
-            var tr = $("<tr/>").appendTo("#subject-table");
-            var infoTd = $("<td/>")
-                .addClass("hide")
-                .attr("colspan", "255")
-                .appendTo($("<tr/>").appendTo("#subject-table"));
+            var tr = $("<tr/>").appendTo("#subject-table")
+            .addClass("subject-item")
+            .append($("<td/>").text(s.name))
+            .append($("<td/>").text(s.professor.realname))
+            .append($("<td/>").text(s.type1))
+            .append($("<td/>").text(s.type2))
+            .append($("<td/>").text(s.source))
+            .click(function(){
+                $(this).next().toggle("fast").next().toggle("fast");
+            });
 
-            $("<td/>").text(s.name).appendTo(tr);
-            $("<td/>").text(s.desc).appendTo(tr);
-            $("<td/>").text(s.professor.realname).appendTo(tr);
-            $("<td/>").text(s.type1).appendTo(tr);
-            $("<td/>").text(s.type2).appendTo(tr);
-            $("<td/>").text(s.source).appendTo(tr);
+            $("#subject-table").append(
+                $("<tr/>").addClass("extra")
+                .append($("<td/>").attr("colspan", 6)
+                    .append($("<h4/>").text("课题描述"))
+                    .append($("<p/>").text(s.desc)))
+            );
 
-            var td = $("<td/>").appendTo(tr);
+            var selcon = $("<p/>").appendTo(
+                    ($("<td/>").attr("colspan", 6)
+                        .append($("<h4/>").text("选课情况")))
+                    .appendTo($("<tr/>").addClass("extra")
+                    .appendTo("#subject-table")));
+
+            var statusbtn = $("<button/>").addClass('btn').attr("type","button");
 
             if (s.selected_by) {
 
-                var toggle = $("<button/>").addClass("btn").click(function(){
-                    infoTd.toggleClass("show");
-                }).text("查看选课学生").appendTo(td);
+                statusbtn.text("报选课程");
 
-                $("<p/>").text("报选学生：").appendTo(infoTd);
-                var ul = $("<ul/>").appendTo(infoTd);
-
-                $.each(s.selected_by, function(i, s) {
-                    $("<li/>").text(s.realname).appendTo(ul);
-                });
+                if(!s.selected_by.length) {
+                    selcon.append("该项目尚未有学生选报");
+                }else{
+                    selcon.append("该项目已被以下学生选报: ");
+                    $.each(s.selected_by, function(i, s) {
+                        $("<a/>").text(s.realname)
+                                 .attr("href", "#" + s.username)
+                            .appendTo(selcon);
+                        selcon.append("、");
+                        if(profile.username == s.username){
+                            statusbtn.text("已报选");
+                            statusbtn.addClass("btn-inverse");
+                        }
+                    });
+                }
 
                 var selectButton = $("<button/>").addClass("btn").click(function(s) {
                     postJson({
@@ -198,20 +216,28 @@
                         error : function(){
                         }
                     });
-                }).appendTo(td);
-
-                if (profile.selectedSubject && profile.selectedSubject == s.id) {
-                    selectButton.text("已报选").attr("disabled", "disabled").addClass("disabled");
-                } else {
-                    selectButton.text("报选");
-                }
+                });
 
             } else if (s.applied_to) {
-                $("<p/>").text("已选学生：").appendTo(td);
-                $("<div/>").text(s.applied_to.realname);
+
+                statusbtn.text("已确定")
+                    .addClass("disabled").attr("disabled","disabled");
+                
+                if(s.applied_to.username == profile.username) {
+                    // I'm Applied
+                    statusbtn.addClass("btn-success");
+                }
+
+                selcon.append("该项目")
+                    .append($("<a/>").text(s.professor.realname).attr("href", "#" + s.professor.username))
+                    .append("导师选择了").append($("<a/>").text(s.applied_to.realname).attr("href", "#" + s.applied_to.username))
+                    .append("完成此项目，本项目双选过程已完结");
+
             } else {
 
             }
+
+            $("<td/>").append(statusbtn).addClass("subject-state").appendTo(tr);
         }
 
         getJson({
