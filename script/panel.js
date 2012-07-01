@@ -297,7 +297,8 @@
         }
 
         var addToSelectStudent = function(s) {
-            if (profile.username == s.professor.username)
+
+            if (profile.username != s.professor.username)
                 return;
 
             var tbody = $("#subject-selection-table");
