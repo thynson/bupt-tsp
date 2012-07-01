@@ -398,7 +398,7 @@
         }
 
         var oldHash = $.sha1(oldPassword + $.sha1(username));
-        var newHash = $.sha1(newPassword = $.sha1(username));
+        var newHash = $.sha1(newPassword + $.sha1(username));
         var postData = "password="
         + encodeURIComponent(oldPassword)
         + "&new_password="
