@@ -457,6 +457,26 @@
         });
     });
 
+    ajaxSubmit($('#resetDatabase'), function() {
+        var password = $('#resetDatabase input[type="password"]').val()
+        var hash = $.sha1(password + $.sha1($.cookie('username')));
+        var postadata = encodeURIComponent("password=" + hash);
+        postJson({
+            url : "/reset",
+            data : postdata,
+            callback : function(obj) {
+                if (obj.err) {
+                    alertFailure("#resetDatabaseAlert", obj.err);
+                } else {
+                    logout();
+                }
+            },
+            error : function(obj) {
+                alertInternalError("#resetDatabaseAlert");
+            }
+        });
+    });
+
     $('#submit-import').click(function(){
         $('#import-student').upload("/import", function(obj) {
             alertSuccess("#importDataAlter", $(this).val());

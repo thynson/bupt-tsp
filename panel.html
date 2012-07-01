@@ -371,6 +371,26 @@
                   </div>
                 </div>
 
+                <form class="form-horizontal" id="resetDatabase">
+                  <div class="legend">重置数据库</div>
+                  <div class="control-group">
+                    <label class="control-label">密码</label>
+                    <div class="controls">
+                      <input type="password" name="student" id="import-student"/>
+                      <p class="help-block">为防止误操作，请输入密码，成功后将自动登出。</p>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="btn btn-primary" id="submit-import">提交</button>
+                    <button class="btn" id="reset-import">重置</button>
+                    <div class="alert fade in hide" data-alert="alert"
+                      id="resetDatabaseAlert">
+                      <a class="close" href="#">&times</a>
+                      <p class="info"><p>
+                    </div>
+                  </div>
+                </form>
+
               </div>
 
               <div class="nav-list-pane fade " id="match-student">
