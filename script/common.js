@@ -58,6 +58,7 @@
 
 
 	ajaxSubmit = function(form, callback){
+        form.unbind("submit");
 		form.submit(function(e){
 			try {
 				callback();
