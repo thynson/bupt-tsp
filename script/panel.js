@@ -283,10 +283,11 @@
                         .attr("href", "#")// + s.username)
                         .appendTo(infoTd)
                         .click(function(){
-                            var postdata = "subject=" + s.id + "&student=" + u.username;
+                            var postdata = "subject=" + encodeURIComponent(s.id)
+                            + "&student=" + encodeURIComponent(u.username);
                             postJson({
                                 url : "/approve",
-                                data : encodeURIComponent(postdata),
+                                data : postdata,
                                 callback : function(obj) {
                                     if (obj.err) {
                                         // TODO
@@ -423,9 +424,13 @@
 
 
     ajaxSubmit($("#phaseControl"), function() {
+        var password = $('#phaseControl input[type="password"]').val()
+        var hash = $.sha1(password + $.sha1($.cookie('username')));
+        var postadata = "password=" + encodeURIComponent(hash);
+
         postJson({
             url : "/phase",
-            data : "",
+            data : postdata,
             callback : function(obj) {
                 if (obj.err) {
                     alertFailure("#phaseControlAlert", obj.err);
@@ -460,7 +465,7 @@
     ajaxSubmit($('#resetDatabase'), function() {
         var password = $('#resetDatabase input[type="password"]').val()
         var hash = $.sha1(password + $.sha1($.cookie('username')));
-        var postadata = encodeURIComponent("password=" + hash);
+        var postadata = "password=" + encodeURIComponent(hash);
         postJson({
             url : "/reset",
             data : postdata,
