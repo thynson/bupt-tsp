@@ -3,6 +3,7 @@
     margin: auto;
     display: block;
     position: relative;
+    margin-left: 20px;
 }
 
 #loginForm {

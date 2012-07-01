@@ -490,6 +490,21 @@
         });
     });
 
+    var updateAnnounce = (function(){
+        getJson({
+            url : "/announce",
+            callback : function(obj) {
+                if (obj.err) {
+                } else {
+                    $("#announceText").text(obj.announce).show();
+                    setTimeout(updateAnnounce, 60000);
+                }
+            },
+            error : function(obj) {
+            }
+        });
+        return this;
+    })();
 
     ajaxSubmit($("#issuceAnnounce"), function() {
         postJson({
@@ -500,6 +515,7 @@
                     alertFailure("#issuceAnnounceAlert", obj.err);
                 } else {
                     alertSuccess("#issuceAnnounceAlert", "公告已发布");
+                    updateAnnounce();
                 }
             },
             error : function(obj) {
