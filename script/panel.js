@@ -85,7 +85,7 @@
 
         // Clear the first
 
-        $("#subject-list").empty();
+        $("#my-subject-table").empty();
         $("#subject-table").empty();
 
         var addToMySubject = function(s) {
@@ -95,7 +95,7 @@
             //
             // Add a entry for subject list
             //
-            var li = $("<li/>").appendTo($("#subject-list"));
+            var mytr = $("<tr/>").appendTo($("#my-subject-table"));
             var a = $("<a/>").click(function(){
 
                 $("#subject-form .legend").text("编辑课题");
@@ -138,6 +138,7 @@
                             if (obj.err) {
                                 alertFailure("#subjectFormAlert", obj.err);
                             } else {
+                                getSubjectDetail();
                                 alertSuccess("#subjectFormAlert", "更新成功");
                             }
                         },
@@ -146,7 +147,7 @@
                         }
                     });
                 });
-            }).text(s.name).appendTo(li);
+            }).text(s.name).appendTo($("<td/>").appendTo(mytr));
 
         }
 
