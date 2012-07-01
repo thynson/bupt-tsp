@@ -33,20 +33,22 @@
         });
     });
 
-    var updateAnnounce = (function(){
+    window.updateAnnounce = (function(){
         getJson({
             url : "/announce",
             callback : function(obj) {
                 if (obj.err) {
                 } else {
                     $("#announce p").text(obj.announce).show();
-                    setTimeout(updateAnnounce, 60000);
+                    setTimeout("updateAnnounce();", 60000);
                 }   
             },  
             error : function(obj) {
+                setTimeout("updateAnnounce();", 60000);
             }   
         }); 
-        return this;
-    })();
+    });
+
+    updateAnnounce();
 
 })($);

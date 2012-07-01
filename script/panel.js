@@ -491,21 +491,24 @@
         });
     });
 
-    var updateAnnounce = (function(){
+    window.updateAnnounce = function(){
         getJson({
             url : "/announce",
             callback : function(obj) {
-                if (obj.err) {
-                } else {
-                    $("#announceText").text(obj.announce).show();
-                    setTimeout(updateAnnounce, 60000);
+                if (obj.announce) {
+                    $("#announceText").text(obj.announce).parent().show();
+                    if(!$("#announceTextarea").is(":visible"))
+                        $("#announceTextarea").text(obj.announce);
                 }
+                window.setTimeout("updateAnnounce();", 60000);
             },
             error : function(obj) {
+                window.setTimeout("updateAnnounce();", 60000);
             }
         });
-        return this;
-    })();
+    }; 
+
+    updateAnnounce();
 
     ajaxSubmit($("#issuceAnnounce"), function() {
         postJson({
