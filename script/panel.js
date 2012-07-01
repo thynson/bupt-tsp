@@ -426,7 +426,7 @@
     ajaxSubmit($("#phaseControl"), function() {
         var password = $('#phaseControl input[type="password"]').val()
         var hash = $.sha1(password + $.sha1($.cookie('username')));
-        var postadata = "password=" + encodeURIComponent(hash);
+        var postdata = "password=" + encodeURIComponent(hash);
 
         postJson({
             url : "/phase",
