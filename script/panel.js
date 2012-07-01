@@ -12,19 +12,19 @@
         // Error occured, so clear the cookie and redirect to login.html
 
         $.cookie("username");
-        $.cookie("identity");
+        $.cookie("role");
 
         location.href = "/login.html";
     }
 
     // Check cookie to confirm user session
 
-    if (!$.cookie("username") && !$.cookie("identity")) {
+    if (!$.cookie("username") && !$.cookie("role")) {
         logout();
     } else {
-        var identity = $.cookie("identity");
-        if (identity) {
-            enableClass(identity);
+        var role = $.cookie("role");
+        if (role) {
+            enableClass(role);
         } else {
             logout();
         }

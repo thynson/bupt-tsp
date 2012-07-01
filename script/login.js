@@ -21,6 +21,8 @@
                     if (obj.err) {
                         alertFailure(".alert", obj.err);
                     } else {
+                        $.cookie("username", username);
+                        $.cookie("role", obj.role);
                         location.href = "/panel.html";
                     }
                 } catch(e) {
