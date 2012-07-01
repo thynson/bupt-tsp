@@ -65,8 +65,8 @@ table tr td {
     background-image: url("../img/glyphicons-halflings-white.png");
 }
 
-.nav-list li i {
-    margin-right: 10px !important;
+[class^="icon-"], [class*=" icon-"] {
+    margin-right: 6px !important;
 }
 
 .form-horizontal .controls label {
