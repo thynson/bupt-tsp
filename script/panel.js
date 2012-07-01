@@ -88,8 +88,10 @@
         $("#subject-list").empty();
         $("#subject-table").empty();
 
-        var processSubject = function(s){
+        var addToMySubject = function(s) {
 
+            if (s.professor.username != profile.username)
+                return;
             //
             // Add a entry for subject list
             //
@@ -146,6 +148,12 @@
                 });
             }).text(s.name).appendTo(li);
 
+        }
+
+        var processSubject = function(s){
+
+            addToMySubject(s);
+
             //
             // Add a entry for table
             //
@@ -161,6 +169,7 @@
             $("<td/>").text(s.type1).appendTo(tr);
             $("<td/>").text(s.type2).appendTo(tr);
             $("<td/>").text(s.source).appendTo(tr);
+
             var td = $("<td/>").appendTo(tr);
 
             if (s.selected_by) {
