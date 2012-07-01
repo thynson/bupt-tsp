@@ -273,7 +273,7 @@
             if (s.selected_by) {
                 infoTd.append("选择该课程的学生：");
                 $.each(s.selected_by, function(i, u){
-                    splitter = "、 ";
+                    var splitter = "、 ";
 
                     if (i != 0) {
                         infoTd.append(splitter);
