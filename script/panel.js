@@ -306,7 +306,7 @@
                 });
             }
 
-            if (s.selected_by && s.applied_to){
+            if (s.selected_by.length != 0 && s.applied_to){
                 var p = $("<p/>").text("已选择:").appendTo(td);
                 $("<b/>").text(s.applied_to.realname).appendTo(p);
                 p = $("<p/>").text("其他选择了这个课题的人数：").appendTo(td);
@@ -314,7 +314,7 @@
             } else if (s.applied_to) {
                 var p = $("<p/>").text("已选择:").appendTo(td);
                 $("<b/>").text(s.applied_to.realname).appendTo(p);
-            } else if (s.selected_by) {
+            } else if (s.selected_by.length != 0) {
                 var p = $("<p/>").text("选择了这个课题的人数：").appendTo(td);
                 $("<b/>").text(s.selected_by.length).appendTo(p);
             } else {
