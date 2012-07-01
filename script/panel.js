@@ -103,6 +103,7 @@
         $("#my-subject-table #subject-form").insertAfter("#subject-table");
         $("#my-subject-table").empty();
         $("#subject-table").empty();
+        $("#subject-selection-table").empty();
 
         var addToMySubject = function(s) {
 
