@@ -230,7 +230,7 @@
 
                 statusbtn.text("已确定")
                     .addClass("disabled").attr("disabled","disabled");
-                
+
                 if(s.applied_to.username == profile.username) {
                     // I'm Applied
                     statusbtn.addClass("btn-success");
@@ -385,22 +385,32 @@
         });
     });
 
-    ajaxSubmit($("#importData"), function() {
-        postJson({
-            url : "/import",
-            data : $("#importData").serialize(),
-            callback : function(obj) {
-                if (obj.err) {
-                    alertFailure("#importDataAlter", obj.err);
-                } else {
-                    alertSuccess("#importDataAlter", "导入完成");
-                }
-            },
-            error : function(obj) {
-                alertInternalError("#importDataAlter");
+    $('#submit-import').click(function(){
+        $('#import-student').upload("/import", function(obj) {
+            alertSuccess("#importDataAlter", $(this).val());
+            if (obj.err) {
+            } else {
             }
-        });
+        }, "json");
+        $('#import-professor').upload("/import", function(obj) {
+            alertSuccess("#importDataAlter", $(this).val());
+            if (obj.err) {
+            } else {
+            }
+
+        }, "json");
     });
 
+    $('#reset-import').click(function(e){
+        e.preventDefault();
+        $('#import-professor').replaceWith('<input type="file" name="student" id="import-professor"/>');
+        $('#import-student').replaceWith('<input type="file" name="student" id="import-student"/>');
+    });
+
+    $('#submit-resume').click(function(e) {
+        $('#upload-resume').upload("/import", function(obj) {
+            alertSuccess("#uploadResumeAlert", "成功上传");
+        }, "json");
+    });
 
 })($);

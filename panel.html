@@ -143,20 +143,23 @@
                   </div>
                 </form>
 
-                <form id="upload-resume" class="Student Professor hide form-horizontal">
+                <div class="Student Professor hide form-horizontal">
                   <div class="legend">上传简历</div>
                   <div class="control-group">
                     <label class="control-label">选择文件</label>
                     <div class="controls">
-                      <input class="span3" type="file"
-                      class="input-file"/>
+                      <input class="span3" type="file" name="resume" id="upload-resume"/>
                     </div>
                   </div>
                   <div class="form-actions">
-                    <button class="btn btn-primary" type="submit">提交</button>
-                    <button class="btn" type="reset">重置</button>
+                    <button class="btn btn-primary" id="submit-resume">提交</button>
+                    <button class="btn" id="reset-resume">重置</button>
+                    <div class="alert fade in hide" id="uploadResumeAlert" data-alert="alert">
+                      <a class="close" href="#">&times;</a>
+                      <p class="info"></p>
+                    </div>
                   </div>
-                </form>
+                </div>
               </div>
 
               <div class="nav-list-pane fade" id="subject">
@@ -331,32 +334,32 @@
                   </fieldset>
                 </form>
 
-                <form class="form-horizontal" id="importData">
+                <div class="form-horizontal">
                   <div class="legend">导入数据</div>
-                  <fieldset>
+                  <div>
                     <div class="control-group">
                       <label class="control-label">学生数据</label>
                       <div class="controls">
-                        <input type="file" name="student"/>
+                        <input type="file" name="student" id="import-student"/>
                       </div>
                     </div>
                     <div class="control-group">
                       <label class="control-label">导师数据</label>
                       <div class="controls">
-                        <input type="file" name="professor"/>
+                        <input type="file" name="professor" id="import-professor"/>
                       </div>
                     </div>
                     <div class="form-actions">
-                      <button class="btn btn-primary" type="submit">提交</button>
-                      <button class="btn" type="reset">重置</button>
+                      <button class="btn btn-primary" id="submit-import">提交</button>
+                      <button class="btn" id="reset-import">重置</button>
                       <div class="alert fade in hide" data-alert="alert"
                         id="importDataAlter">
                         <a class="close" href="#">&times</a>
                         <p class="info"><p>
                       </div>
                     </div>
-                  </fieldset>
-                </form>
+                  </div>
+                </div>
 
               </div>
 
@@ -392,6 +395,7 @@
     <script type="text/javascript" src="/script/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="/script/jquery.cookie.js"></script>
     <script type="text/javascript" src="/script/jquery.disableselection.js"></script>
+    <script type="text/javascript" src="/script/jquery.upload-1.0.2.js"></script>
     <script type="text/javascript" src="/script/bootstrap.min.js"></script>
     <script type="text/javascript" src="/script/bootstrap-navlist.js"></script>
     <script type="text/javascript" src="/script/bootstrap-alert.js"></script>
