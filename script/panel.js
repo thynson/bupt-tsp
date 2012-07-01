@@ -52,7 +52,7 @@
             $("#subject-form .legend").text("新增课题");
 
             // Set title
-            $('#subject-form input[name="title"]').val("");
+            $('#subject-form input[name="name"]').val("");
 
             // Set desc
             $('#subject-form textarea[name="desc"]').val("");
@@ -126,10 +126,10 @@
                     $("#subject-form").insertAfter(p);
 
                     p.hide()
-                    
+
                     $("#subject-form .legend").text("编辑课题：" + p.text());
                     // Set title
-                    $('#subject-form input[name="title"]').val(s.name);
+                    $('#subject-form input[name="name"]').val(s.name);
 
                     // Set desc
                     $('#subject-form textarea[name="desc"]').val(s.desc);
@@ -182,7 +182,7 @@
                 });
             })));
         }
-        
+
         var $subjectselecttable = $("#subject-select-table");
 
         $(window).resize(function(){
@@ -515,7 +515,7 @@
                 window.setTimeout("updateAnnounce();", 60000);
             }
         });
-    }; 
+    };
 
     updateAnnounce();
 
