@@ -209,9 +209,12 @@
                         return false;
                     })))
                     .addClass("subject-professor")
-            .append($("<td/>").text(s.type1).addClass("visible-desktop subject-type1"))
-            .append($("<td/>").text(s.type2).addClass("visible-desktop subject-type2"))
-            .append($("<td/>").text(s.source).addClass("visible-desktop subject-source"))
+            .append($("<td/>").text($("#subject-form #subject-type1 button:nth-child("+s.type1+")").text())
+                .addClass("visible-desktop subject-type1"))
+            .append($("<td/>").text($("#subject-form #subject-type2 button:nth-child("+s.type2+")").text())
+                .addClass("visible-desktop subject-type2"))
+            .append($("<td/>").text($("#subject-form #subject-source button:nth-child("+s.source+")").text())
+                .addClass("visible-desktop subject-source"))
             .click(function(){
                 $(this).next().toggle("fast").next().toggle("fast");
             });
