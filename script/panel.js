@@ -33,26 +33,38 @@
 
     // Close the subject detail form
     $('#subject-form button.close-form').click(function(){
-        $('#subject-form').hide("fast");
+        $('#subject-form').hide("fast").prev().show();
         return false;
     });
 
     $("#add-subject").click(function () {
-        // professor add or modify subject
-        $("#subject-form .legend").text("新增课题");
 
-        // Set title
-        $('#subject-form input[name="title"]').val("");
+        if($("#subject-form").prev()[0] == this)
+            return;
 
-        // Set desc
-        $('#subject-form textarea[name="desc"]').val("");
+        $("#subject-form").hide("fast", function(){
 
-        $('#subject-form div[name="type1"] button').removeClass("active");
-        $('#subject-form div[name="type2"] button').removeClass("active");
-        $('#subject-form div[name="source"] button').removeClass("active");
+            $("#subject-form").prev().show();
 
+            $("#subject-form").insertAfter($("#add-subject").parent());
 
-        $("#subject-form").show("fast");
+            // professor add or modify subject
+            $("#subject-form .legend").text("新增课题");
+
+            // Set title
+            $('#subject-form input[name="title"]').val("");
+
+            // Set desc
+            $('#subject-form textarea[name="desc"]').val("");
+
+            $('#subject-form div[name="type1"] button').removeClass("active");
+            $('#subject-form div[name="type2"] button').removeClass("active");
+            $('#subject-form div[name="source"] button').removeClass("active");
+
+            $("#subject-form").show("fast", function(){
+                        $(this).goTo();
+                    });
+        });
 
         ajaxSubmit($("#subject-form"), function() {
             var postdata = $("#subject-form").serialize()
@@ -71,6 +83,7 @@
                         alertFailure("#subjectFormAlert", obj.err);
                     } else {
                         alertSuccess("#subjectFormAlert", "成功增加课题");
+                        // TODO Update the subject-table
                     }
                 },
                 error : function() {
@@ -78,6 +91,7 @@
                 }
             });
         });
+
     });
 
     // Get the subject detail
@@ -85,6 +99,7 @@
 
         // Clear the first
 
+        $("#my-subject-table #subject-form").insertAfter("#subject-table");
         $("#my-subject-table").empty();
         $("#subject-table").empty();
 
@@ -95,29 +110,45 @@
             //
             // Add a entry for subject list
             //
-            var mytr = $("<tr/>").appendTo($("#my-subject-table"));
-            var a = $("<a/>").click(function(){
+            var p = $("<p/>").text(s.name).appendTo($("<td/>").appendTo(
+            $("<tr/>").appendTo($("#my-subject-table"))
+            .click(function(){
 
-                $("#subject-form .legend").text("编辑课题");
-                // Set title
-                $('#subject-form input[name="title"]').val(s.name);
+                if($("#subject-form").parent().parent()[0] == this && $("#subject-form").is(":visible"))
+                    return;
 
-                // Set desc
-                $('#subject-form textarea[name="desc"]').val(s.desc);
+                $("#subject-form").hide("fast", function(){
 
-                // Clear active class
-                $('#subject-form div[name="type1"] button').removeClass("active");
-                $('#subject-form div[name="type2"] button').removeClass("active");
-                $('#subject-form div[name="source"] button').removeClass("active");
+                    $("#subject-form").prev().show();
 
-                $('#subject-form div[name="type1"] button[name="'
-                    + s.type1 + '"]').addClass("active");
-                $('#subject-form div[name="type2"] button[name="'
-                    + s.type2 + '"]').addClass("active");
-                $('#subject-form div[name="source"] button[name="'
-                    + s.source + '"]').addClass("active");
+                    $("#subject-form").insertAfter(p);
 
-                $("#subject-form").show("fast");
+                    p.hide()
+                    
+                    $("#subject-form .legend").text("编辑课题：" + p.text());
+                    // Set title
+                    $('#subject-form input[name="title"]').val(s.name);
+
+                    // Set desc
+                    $('#subject-form textarea[name="desc"]').val(s.desc);
+
+                    // Clear active class
+                    $('#subject-form div[name="type1"] button').removeClass("active");
+                    $('#subject-form div[name="type2"] button').removeClass("active");
+                    $('#subject-form div[name="source"] button').removeClass("active");
+
+                    $('#subject-form div[name="type1"] button[name="'
+                        + s.type1 + '"]').addClass("active");
+                    $('#subject-form div[name="type2"] button[name="'
+                        + s.type2 + '"]').addClass("active");
+                    $('#subject-form div[name="source"] button[name="'
+                        + s.source + '"]').addClass("active");
+
+                    $("#subject-form").show("fast", function(){
+                        $(this).goTo();
+                    });
+
+                });
 
                 // professor add or modify subject
                 ajaxSubmit($("#subject-form"), function() {
@@ -147,8 +178,7 @@
                         }
                     });
                 });
-            }).text(s.name).appendTo($("<td/>").appendTo(mytr));
-
+            })));
         }
 
         Harvey.attach('(max-width:980px)', {

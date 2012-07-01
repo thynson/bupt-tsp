@@ -13,3 +13,7 @@ textarea.textarea {
 #subject-select-table td {
     word-wrap: break-word;
 }
+
+#my-subject .btn-toolbar {
+    text-align: right;
+}
