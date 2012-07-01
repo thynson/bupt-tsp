@@ -1,5 +1,7 @@
 
 ;(function($){
+
+
     var errHandler = function() {
         alertInternalError(".alert");
     };
@@ -21,6 +23,10 @@
                     if (obj.err) {
                         alertFailure(".alert", obj.err);
                     } else {
+                        // Clear cookie first
+                        $.cookie("username", null);
+                        $.cookie("role", null);
+
                         $.cookie("username", username);
                         $.cookie("role", obj.role);
                         location.href = "/panel.html";
