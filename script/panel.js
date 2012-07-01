@@ -160,7 +160,11 @@
             var tr = $("<tr/>").appendTo("#subject-table")
             .addClass("subject-item")
             .append($("<td/>").text(s.name))
-            .append($("<td/>").text(s.professor.realname))
+            .append($("<td/>").append($("<a/>").text(s.professor.realname).attr("href", "#" + s.professor.username)
+                    .click(function(){
+                        // TODO Open the profile of the professor
+                        return false;
+                    })))
             .append($("<td/>").text(s.type1))
             .append($("<td/>").text(s.type2))
             .append($("<td/>").text(s.source))
@@ -169,7 +173,7 @@
             });
 
             $("#subject-table").append(
-                $("<tr/>").addClass("extra")
+                $("<tr/>").addClass("extra hide")
                 .append($("<td/>").attr("colspan", 6)
                     .append($("<h4/>").text("课题描述"))
                     .append($("<p/>").text(s.desc)))
@@ -178,45 +182,51 @@
             var selcon = $("<p/>").appendTo(
                     ($("<td/>").attr("colspan", 6)
                         .append($("<h4/>").text("选课情况")))
-                    .appendTo($("<tr/>").addClass("extra")
+                    .appendTo($("<tr/>").addClass("extra hide")
                     .appendTo("#subject-table")));
 
             var statusbtn = $("<button/>").addClass('btn').attr("type","button");
 
             if (s.selected_by) {
 
-                statusbtn.text("报选课程");
-
-                if(!s.selected_by.length) {
-                    selcon.append("该项目尚未有学生选报");
-                }else{
-                    selcon.append("该项目已被以下学生选报: ");
-                    $.each(s.selected_by, function(i, s) {
-                        $("<a/>").text(s.realname)
-                                 .attr("href", "#" + s.username)
-                            .appendTo(selcon);
-                        selcon.append("、");
-                        if(profile.username == s.username){
-                            statusbtn.text("已报选");
-                            statusbtn.addClass("btn-inverse");
-                        }
-                    });
-                }
-
-                var selectButton = $("<button/>").addClass("btn").click(function(s) {
+                statusbtn.text("报选课程").click(function(){
+                    var button = $(this);
                     postJson({
                         url : "/select",
                         data : "subject=" + encodeURIComponent(s.id),
                         callback : function (obj) {
+                            // TODO Incremental Update the Table
                             if (obj.err) {
                             } else {
                                 getSubjectDetail();
                             }
                         },
                         error : function(){
+                            // TODO Handle errors
                         }
                     });
+                    return false;
                 });
+
+                if(!s.selected_by.length) {
+                    selcon.append("该项目尚未有学生选报");
+                }else{
+                    selcon.append("该项目已被以下学生选报");
+                    var splitter = "： "
+                    $.each(s.selected_by, function(i, s) {
+                        selcon.append(splitter);
+                        splitter = "、 ";
+                        $("<a/>").text(s.realname)
+                                 .attr("href", "#" + s.username)
+                            .appendTo(selcon);
+                        if(profile.username == s.username){
+                            statusbtn.text("已报选");
+                            statusbtn.addClass("btn-inverse");
+                            // TODO Change the action of statusbtn.click to
+                            // unsubscribe to the project
+                        }
+                    });
+                }
 
             } else if (s.applied_to) {
 
@@ -228,6 +238,8 @@
                     statusbtn.addClass("btn-success");
                 }
 
+                // TODO Handle the open of professor profile and student
+                // profile
                 selcon.append("该项目")
                     .append($("<a/>").text(s.professor.realname).attr("href", "#" + s.professor.username))
                     .append("导师选择了").append($("<a/>").text(s.applied_to.realname).attr("href", "#" + s.applied_to.username))

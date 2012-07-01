@@ -5,3 +5,11 @@ textarea.textarea {
 .subject-item td.subject-state {
     text-align: center;
 }
+
+#subject-select-table {
+    table-layout: fixed;
+}
+
+#subject-select-table td {
+    word-wrap: break-word;
+}
