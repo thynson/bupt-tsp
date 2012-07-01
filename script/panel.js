@@ -181,24 +181,19 @@
                 });
             })));
         }
+        
+        var $subjectselecttable = $("#subject-select-table");
 
-        Harvey.attach('(max-width:980px)', {
-            setup: function(){}, 
-            on: function(){
-                $("#subject-select-table").attr("extra-span", "3");
-                $("#subject-select-table .extra td").attr("colspan", 3);
-            },
-            off: function(){}
-        });
-
-        Harvey.attach('(min-width:979px)', {
-            setup: function(){}, 
-            on: function(){
-                $("#subject-select-table").attr("extra-span", "6");
-                $("#subject-select-table .extra td").attr("colspan", 6);
-            }, 
-            off: function(){}
-        });
+        $(window).resize(function(){
+            var esp = 6;
+            if(document.documentElement.clientWidth < 980) {
+                esp = 3
+            }
+            if($subjectselecttable.attr("extra-span") != esp) {
+                $subjectselecttable.attr("extra-span", esp);
+                $("#subject-select-table .extra td").attr("colspan", esp);
+            }
+        }).resize();
 
         var addToSubjectTable = function(s) {
 
