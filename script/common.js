@@ -72,4 +72,19 @@
     // Disable Text Selection on label and legend tags
     $("label,.legend").disableSelection();
 
+    $(".legend").click(function(){
+        $(this).goTo();
+    });
+
 })($);
+
+// jQuery Extension to goTo
+
+(function($) {
+    $.fn.goTo = function() {
+        $('html, body').animate({
+            scrollTop: $(this).offset().top + 'px'
+        }, 'fast');
+        return this; // for chaining...
+    }
+})(jQuery);
