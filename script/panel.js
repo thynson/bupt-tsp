@@ -39,8 +39,30 @@
 
     $("#add-subject").click(function () {
         // professor add or modify subject
+        $("#subject-form .legend").text("新增课题");
+
+        // Set title
+        $('#subject-form input[name="title"]').val("");
+
+        // Set desc
+        $('#subject-form textarea[name="desc"]').val("");
+
+        $('#subject-form div[name="type1"] button').removeClass("active");
+        $('#subject-form div[name="type2"] button').removeClass("active");
+        $('#subject-form div[name="source"] button').removeClass("active");
+
+
         $("#subject-form").show("fast");
+
         ajaxSubmit($("#subject-form"), function() {
+            var postdata = $("#subject-form").serialize()
+                + "&type1="
+                + $('#subject-form div[name="type1"] .active').attr("name")
+                + "&type2="
+                + $('#subject-form div[name="type2"] .active').attr("name")
+                + "&source="
+                + $('#subject-form div[name="source"] .active').attr("name");
+
             postJson({
                 url : "/add",
                 data : $("#subject-form").serialize(),
@@ -72,21 +94,41 @@
             // Add a entry for subject list
             //
             var li = $("<li/>").appendTo($("#subject-list"));
-            $("<a/>").click(function(){
+            var a = $("<a/>").click(function(){
+
+                $("#subject-form .legend").text("编辑课题");
                 // Set title
-                $('#subject-form input[name="title"]').text(s.name);
+                $('#subject-form input[name="title"]').val(s.name);
 
                 // Set desc
-                $('#subject-form textarea[name="desc"]').text(s.desc);
+                $('#subject-form textarea[name="desc"]').val(s.desc);
 
-                // TODO: type1 type2 source
+                // Clear active class
+                $('#subject-form div[name="type1"] button').removeClass("active");
+                $('#subject-form div[name="type2"] button').removeClass("active");
+                $('#subject-form div[name="source"] button').removeClass("active");
+
+                $('#subject-form div[name="type1"] button[name="'
+                    + s.type1 + '"]').addClass("active");
+                $('#subject-form div[name="type2"] button[name="'
+                    + s.type2 + '"]').addClass("active");
+                $('#subject-form div[name="source"] button[name="'
+                    + s.source + '"]').addClass("active");
 
                 $("#subject-form").show("fast");
 
-                var postdata = "id=" + s.id + "&" + $("#subject-form").serialize();
-
                 // professor add or modify subject
                 ajaxSubmit($("#subject-form"), function() {
+
+                    var postdata = "id=" + s.id + "&"
+                        + $("#subject-form").serialize()
+                        + "&type1="
+                        + $('#subject-form div[name="type1"] .active').attr("name")
+                        + "&type2="
+                        + $('#subject-form div[name="type2"] .active').attr("name")
+                        + "&source="
+                        + $('#subject-form div[name="source"] .active').attr("name")
+
                     postJson({
                         url : "/modify",
                         data : postdata,
@@ -102,7 +144,7 @@
                         }
                     });
                 });
-            }).appendTo(li);
+            }).text(s.name).appendTo(li);
 
             //
             // Add a entry for table
