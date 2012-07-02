@@ -321,6 +321,37 @@
             $("<td/>").text(s.name).appendTo(tr);
             var td = $("<td/>").appendTo(tr);
 
+
+            var unselectStudent = function(s) {
+                td.empty();
+                var p = $("<p/>").text("选择了这个课题的人数：").appendTo(td);
+                $("<b/>").text(s.selected_by.length).appendTo(p);
+            }
+            //
+            // u: The student
+            // s: The subject
+            var selectStudent = function(u, s) {
+                td.empty();
+                var p = $("<p/>").text("已选择:").appendTo(td);
+                var a = $("<a/>").click(function(){
+                    // post unselcect
+                    var postdata = "subject=" + encodeURIComponent(s.id);
+                    postJson({
+                        url : "/approve",
+                        data : postdata,
+                        callback : function(obj) {
+                            unselectStudent();
+                        },
+                        error : function(){
+                        }
+                    });
+                }).appendTo(p);
+                $("<b/>").text(u.realname).appendTo(a);
+                p.append("点击学生姓名可以取消选择");
+                p = $("<p/>").text("其他选择了这个课题的人数：").appendTo(td);
+                $("<b/>").text(s.selected_by.length - 1).appendTo(p);
+            }
+
             if (s.selected_by) {
 
                 if(!s.selected_by.length) {
@@ -335,7 +366,7 @@
                         }
 
                         $("<a/>").text(u.realname)
-                            .attr("href", "#")// + s.username)
+                            .attr("href", "#")// + s.username
                             .appendTo(infoTd)
                             .click(function(){
                                 var postdata = "subject=" + encodeURIComponent(s.id)
@@ -347,11 +378,7 @@
                                         if (obj.err) {
                                             // TODO
                                         } else {
-                                            td.empty();
-                                            var p = $("<p/>").text("已选择:").appendTo(td);
-                                            $("<b/>").text(u.realname).appendTo(p);
-                                            p = $("<p/>").text("其他选择了这个课题的人数：").appendTo(td);
-                                            $("<b/>").text(s.selected_by.length - 1).appendTo(p);
+                                            selectStudent(u, s);
                                         }
                                     },
                                     error : function(obj) {
@@ -361,19 +388,16 @@
                             });;
                     });
                 }
+                infoTd.append("点击该学生姓名可以选择学生。");
             }
 
             if (s.selected_by.length != 0 && s.applied_to){
-                var p = $("<p/>").text("已选择:").appendTo(td);
-                $("<b/>").text(s.applied_to.realname).appendTo(p);
-                p = $("<p/>").text("其他选择了这个课题的人数：").appendTo(td);
-                $("<b/>").text(s.selected_by.length - 1).appendTo(p);
+                selectStudent(s.applied_to, s);
             } else if (s.applied_to) {
                 var p = $("<p/>").text("已选择:").appendTo(td);
                 $("<b/>").text(s.applied_to.realname).appendTo(p);
             } else if (s.selected_by.length != 0) {
-                var p = $("<p/>").text("选择了这个课题的人数：").appendTo(td);
-                $("<b/>").text(s.selected_by.length).appendTo(p);
+                unselectStudent(s);
             } else {
                 var p = $("<p/>").text("无人报选").appendTo(td);
 
