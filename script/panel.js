@@ -193,6 +193,10 @@
             if($subjectselecttable.attr("extra-span") != esp) {
                 $subjectselecttable.attr("extra-span", esp);
                 $("#subject-select-table .extra td").attr("colspan", esp);
+
+                // IE6 Workaround to resize the table
+                $("#subject-select-table").css("display", "inline-table");
+                window.setTimeout(function(){$("#subject-select-table").css("display", "");},0);
             }
         }).resize();
 
