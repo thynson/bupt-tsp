@@ -6,11 +6,11 @@ textarea.textarea {
     text-align: center;
 }
 
-#subject-select-table {
+.table-fixed, #subject-select-table {
     table-layout: fixed;
 }
 
-#subject-select-table td {
+.table-fixed td, #subject-select-table td {
     word-wrap: break-word;
 }
 

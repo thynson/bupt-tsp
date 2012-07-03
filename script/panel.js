@@ -379,7 +379,7 @@
                 .addClass("hide");
             var infoTd = $("<td/>")
                 .appendTo(infoTr)
-                .attr("colspan", 255);
+                .attr("colspan", 2);
 
             tr.click(function(){
                 tr.next().toggle("fast");
