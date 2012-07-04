@@ -614,7 +614,7 @@
                 }
             },
             error : function(obj) {
-                alterInternalError("#issuceAnnounceAlert");
+                alertInternalError("#issuceAnnounceAlert");
             }
         });
     });
