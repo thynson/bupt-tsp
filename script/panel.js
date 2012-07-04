@@ -56,7 +56,7 @@
 
                 $("#subject-form").prev().show();
 
-                $("#subject-form").insertAfter($("#add-subject").parent());
+                $("#subject-form").insertAfter($("#add-subject"));
 
                 // professor add or modify subject
                 $("#subject-form .legend").text("新增课题");
