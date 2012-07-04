@@ -31,6 +31,8 @@
               <li class="Professor hide"><a data-toggle="nav-list" href="#student"><i class="icon-ok"></i>查看选择学生</a></li>
               <li class="Admin hide"><a data-toggle="nav-list" href="#system-admin"><i class="icon-wrench"></i>系统管理</a></li>
               <li class="Admin hide"><a data-toggle="nav-list" href="#match-student"><i class="icon-leaf"></i>调剂学生</a></li>
+              <li class=""><a data-toggle="nav-list" href="#overview"><i
+                  class="icon-leaf"></i>总览</a></li>
 
 
               <li class="divider"></li>
@@ -414,8 +416,21 @@
 
               </div>
 
-              <div class="nav-list-pane fade " id="match-student">
+              <div class="nav-list-pane fade" id="overview">
+                <div class="legend">总览</div>
+                <p>下表列出所有所有已被成功报选的课题，对应的导师和报选的学生</p>
+                <table class="table table-boedered table-striped">
+                  <thead>
+                    <th>课题</th>
+                    <th>导师</th>
+                    <th>学生</th>
+                  </thead>
+                  <tbody id="overview-table">
+                  </tbody>
+                </table>
+              </div>
 
+              <div class="nav-list-pane fade" id="match-student">
               </div>
 
               <div class="nav-list-pane fade" id="faq">
