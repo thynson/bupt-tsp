@@ -275,9 +275,11 @@
                                     alertFailure("#selectSubjectAlert", obj.err);
                                 } else {
                                     var origin = subjectDictionary[profile.selected];
-                                    origin.selected_by = subjectRemoveMyself(origin.selected_by, profile.username);
+                                    if (origin) {
+                                        origin.selected_by = subjectRemoveMyself(origin.selected_by, profile.username);
+                                        origin.updateInfo();
+                                    }
 
-                                    origin.updateInfo();
                                     profile.selected = s.id;
 
                                     s.selected_by.push({
