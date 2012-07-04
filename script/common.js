@@ -69,6 +69,14 @@
 		});
 	};
 
+    serializeObject = function(obj) {
+        var list = [];
+        for (var attr in obj) {
+            list.push(attr + '=' + encodeURIComponent(obj[attr]));
+        }
+        return list.join('&');
+    }
+
     // Disable Text Selection on label and legend tags
     $("label,.legend").disableSelection();
 
