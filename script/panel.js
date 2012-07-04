@@ -448,11 +448,25 @@
             }
         }
 
+        var addToOverview = function(s) {
+            if (s.applied_to && !(s.selected_by && s.selected_by.length != 0)) {
+                var ovTable = $("#overview-table");
+
+                ovTable.append($("<tr/>")
+                    .append($("<td/>").text(s.name))
+                    .append($("<td/>").append(
+                        $("<a/>").text(s.professor.realname).attr("href", "#"+s.professor.username)))
+                    .append($("<td/>").append(
+                        $("<a/>").text(s.applied_to.realname).attr("href", "#"+s.applied_to.username))));
+            }
+        }
+
 
         var processSubject = function(s){
             addToMySubject(s);
             addToSubjectTable(s);
             addToSelectStudent(s);
+            addToOverview(s);
         }
 
         getJson({
