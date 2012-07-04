@@ -308,13 +308,36 @@
                             if(profile.username == t.username && profile.selected == s.id){
                                 statusbtn.text("已报选");
                                 statusbtn.addClass("btn-inverse");
+                                statusbtn.click(function(){
+                                    postJson({
+                                        url : "/select",
+                                        data : "",
+                                        callback : function (obj) {
+                                            if (obj.err) {
+                                                alertFailure("#selectSubjectAlert", obj.err);
+                                            } else {
+                                                var origin = subjectDictionary[profile.selected];
+                                                if (origin) {
+                                                    origin.selected_by = subjectRemoveMyself(origin.selected_by, profile.username);
+                                                    origin.updateInfo();
+                                                }
+                                            }
+                                        },
+                                        error : function(){
+                                            alertInternalError("#selectStudentAlert");
+                                        }
+                                    });
+
+                                });
                                 // TODO Change the action of statusbtn.click to
                                 // unsubscribe to the project
                             }
                         });
                     }
 
-                } else if (s.applied_to) {
+                }
+
+                if (s.applied_to) {
 
                     statusbtn.text("已确定")
                         .addClass("disabled").attr("disabled","disabled");
@@ -515,6 +538,7 @@
                 $(".phase-prev").text(obj.phase-1);
                 $(".phase-current").text(obj.phase);
                 $(".phase-next").text(obj.phase+1);
+                enablePhase(obj.phase);
             }
         });
     }
