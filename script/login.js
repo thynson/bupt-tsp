@@ -45,7 +45,11 @@
             callback : function(obj) {
                 if (obj.err) {
                 } else {
-                    $("#announce pre").text(obj.announce).show();
+                    if(obj.announce && obj.announce != "") {
+                        $("#announce pre").text(obj.announce).show();
+                    }else{
+                        $("#announce pre").text("无公告").show();
+                    }
                     setTimeout("updateAnnounce();", 60000);
                 }
             },

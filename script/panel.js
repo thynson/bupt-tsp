@@ -613,6 +613,8 @@
             url : "/announce",
             callback : function(obj) {
                 if (obj.announce) {
+                    if (obj.announce == "")
+                        obj.announce = "系统暂无公告";
                     $("#announceText").text(obj.announce).parent().show();
                     if(!$("#announceTextarea").is(":visible"))
                         $("#announceTextarea").text(obj.announce);
