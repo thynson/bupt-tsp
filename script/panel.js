@@ -671,13 +671,13 @@
 
     $('#submit-import').click(function(){
         $('#import-student').upload("/import", function(obj) {
-            alertSuccess("#importDataAlter", $(this).val());
+            alertSuccess("#importDataAlert", $(this).val());
             if (obj.err) {
             } else {
             }
         }, "json");
         $('#import-professor').upload("/import", function(obj) {
-            alertSuccess("#importDataAlter", $(this).val());
+            alertSuccess("#importDataAlert", $(this).val());
             if (obj.err) {
             } else {
             }
