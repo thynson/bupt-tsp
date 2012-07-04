@@ -40,6 +40,56 @@
     // Get the subject detail
     var getSubjectDetail = function(){
 
+        var clearFormErrors = function() {
+            $('#subject-form .help-block').remove();
+            $('#subject-form .control-group').removeClass('error');
+        };
+
+        var validateForm = function(subject) {
+
+            clearFormErrors();
+
+            var avaform = true;
+
+            if(subject.name == "") {
+                $('#subject-form input[name="name"]').parents(".controls:first").
+                append($("<span/>").addClass("help-block").text("请填写完整的项目名称"))
+                .parents(".control-group:first").addClass("error");
+                avaform=false;
+            }
+
+            if(subject.desc == "") {
+                $('#subject-form textarea[name="desc"]').parents(".controls:first").
+                append($("<span/>").addClass("help-block").text("请填写您的项目描述，以便学生了解选择"))
+                .parents(".control-group:first").addClass("error");
+                avaform=false;
+            }
+
+            if(!subject.type1) {
+                $('#subject-form div[name="type1"]').parents(".controls:first").
+                append($("<span/>").addClass("help-block").text("第一课题分类未选择"))
+                .parents(".control-group:first").addClass("error");
+                avaform=false;
+            }
+            
+            if(!subject.type2) {
+                $('#subject-form div[name="type2"]').parents(".controls:first").
+                append($("<span/>").addClass("help-block").text("第二课题分类未选择"))
+                .parents(".control-group:first").addClass("error");
+                avaform=false;
+            }
+            
+            if(!subject.source) {
+                $('#subject-form div[name="source"]').parents(".controls:first").
+                append($("<span/>").addClass("help-block").text("课题来源未选择"))
+                .parents(".control-group:first").addClass("error");
+                avaform=false;
+            }
+            
+            return avaform;
+
+        };
+
         // Clear the first
 
         $("#my-subject-table #subject-form").insertAfter("#subject-table");
@@ -49,7 +99,7 @@
 
         $("#add-subject").click(function () {
 
-            if($("#subject-form").prev()[0] == this)
+            if($("#subject-form").prev()[0] == this && $("#subject-form").is(":visible"))
                 return;
 
             $("#subject-form").hide("fast", function(){
@@ -70,7 +120,7 @@
                 $('#subject-form div[name="type1"] button').removeClass("active");
                 $('#subject-form div[name="type2"] button').removeClass("active");
                 $('#subject-form div[name="source"] button').removeClass("active");
-
+                clearFormErrors();
                 $("#subject-form").show("fast", function(){
                             $(this).goTo();
                         });
@@ -85,6 +135,10 @@
                     source : $('#subject-form div[name="source"] .active').attr("name"),
                 };
 
+                if(!validateForm(subject)) {
+                    return;
+                }
+
                 var postdata = serializeObject(subject);
 
                 subject.professor = {
@@ -98,6 +152,7 @@
                     callback : function(obj) {
                         if (obj.err) {
                             alertFailure("#subjectFormAlert", obj.err);
+                            $("#subjectFormAlert").goTo();
                         } else {
                             alertSuccess("#subjectFormAlert", "成功增加课题");
                             $('#subject-form').hide("fast");
@@ -108,6 +163,7 @@
                     },
                     error : function() {
                         alertInternalError("#subjectFormAlert");
+                        $("#subjectFormAlert").goTo();
                     }
                 });
             });
@@ -137,6 +193,8 @@
 
                     p.hide()
 
+                    $('#subject-form').remove('.help-block').remove('.help-inline').removeClass('error');
+
                     $("#subject-form .legend").text("编辑课题：" + p.text());
                     // Set title
                     $('#subject-form input[name="name"]').val(s.name);
@@ -148,6 +206,8 @@
                     $('#subject-form div[name="type1"] button').removeClass("active");
                     $('#subject-form div[name="type2"] button').removeClass("active");
                     $('#subject-form div[name="source"] button').removeClass("active");
+
+                    clearFormErrors();
 
                     $('#subject-form div[name="type1"] button[name="'
                         + s.type1 + '"]').addClass("active");
@@ -174,6 +234,10 @@
                         source : $('#subject-form div[name="source"] .active').attr("name"),
                     };
 
+                    if(!validateForm(subject)) {
+                        return;
+                    }
+
                     var postdata = serializeObject(subject);
                     postJson({
                         url : "/modify",
@@ -181,6 +245,7 @@
                         callback : function(obj) {
                             if (obj.err) {
                                 alertFailure("#subjectFormAlert", obj.err);
+                                $("#subjectFormAlert").goTo();
                             } else {
                                 s.name = subject.name;
                                 s.desc = subject.desc;
@@ -193,6 +258,7 @@
                         },
                         error : function() {
                             alertInternalError("#subjectFormAlert");
+                            $("#subjectFormAlert").goTo();
                         }
                     });
                 });
