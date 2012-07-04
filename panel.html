@@ -26,11 +26,11 @@
               <li class="nav-header">导航</li>
 
               <li class="active"><a data-toggle="nav-list" href="#my-profile"><i class="icon-user"></i>个人资料</a></li>
-              <li class="Student"><a data-toggle="nav-list" href="#subject"><i class="icon-flag"></i>查看选择课题</a></li>
-              <li class="Professor"><a data-toggle="nav-list" href="#my-subject"><i class="icon-briefcase"></i>我的课题</a></li>
-              <li class="Professor"><a data-toggle="nav-list" href="#student"><i class="icon-ok"></i>查看选择学生</a></li>
-              <li class="Admin"><a data-toggle="nav-list" href="#system-admin"><i class="icon-wrench"></i>系统管理</a></li>
-              <li class="Admin"><a data-toggle="nav-list" href="#match-student"><i class="icon-leaf"></i>调剂学生</a></li>
+              <li class="Student hide"><a data-toggle="nav-list" href="#subject"><i class="icon-flag"></i>查看选择课题</a></li>
+              <li class="Professor hide"><a data-toggle="nav-list" href="#my-subject"><i class="icon-briefcase"></i>我的课题</a></li>
+              <li class="Professor hide"><a data-toggle="nav-list" href="#student"><i class="icon-ok"></i>查看选择学生</a></li>
+              <li class="Admin hide"><a data-toggle="nav-list" href="#system-admin"><i class="icon-wrench"></i>系统管理</a></li>
+              <li class="Admin hide"><a data-toggle="nav-list" href="#match-student"><i class="icon-leaf"></i>调剂学生</a></li>
 
 
               <li class="divider"></li>
@@ -266,6 +266,11 @@
               <div class="nav-list-pane fade" id="student">
 
                 <div class="legend">查看选择学生</div>
+                <div class="alert fade in hide" data-alert="alert"
+                  id="selectStudentAlert">
+                  <a class="close" href="#">&times</a>
+                  <p class="info"><p>
+                </div>
                 <table class="table table-bordered table-striped">
                   <thead>
                     <th>课题名</th>

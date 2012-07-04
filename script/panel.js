@@ -417,12 +417,14 @@
                                     data : postdata,
                                     callback : function(obj) {
                                         if (obj.err) {
-                                            // TODO
+                                            alertFailure("#selectStudentAlert", obj.err);
                                         } else {
                                             selectStudent(u, s);
+                                            alertSuccess("#selectStudentAlert", "选择成功");
                                         }
                                     },
                                     error : function(obj) {
+                                        alertInternalError("#selectStudentAlert");
                                     }
                                 });
 
