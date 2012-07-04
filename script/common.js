@@ -77,6 +77,16 @@
         return list.join('&');
     }
 
+    subjectRemoveMyself = function(selectlist, username) {
+        var ret = [];
+        $.each(selectlist, function(i, s) {
+            if (s.username == username)
+                return;
+            ret.push(s);
+        });
+        return ret;
+    }
+
     // Disable Text Selection on label and legend tags
     $("label,.legend").disableSelection();
 
