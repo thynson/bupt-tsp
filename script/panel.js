@@ -7,6 +7,10 @@
         $("."+type).removeClass("hide");
     }
 
+    var enablePhase = function(phase) {
+        $(".phase"+phase).removeClass("hide");
+    }
+
 
     var logout = function() {
         // Error occured, so clear the cookie and redirect to login.html
