@@ -45,14 +45,14 @@
             callback : function(obj) {
                 if (obj.err) {
                 } else {
-                    $("#announce p").text(obj.announce).show();
+                    $("#announce pre").text(obj.announce).show();
                     setTimeout("updateAnnounce();", 60000);
-                }   
-            },  
+                }
+            },
             error : function(obj) {
                 setTimeout("updateAnnounce();", 60000);
-            }   
-        }); 
+            }
+        });
     });
 
     updateAnnounce();
