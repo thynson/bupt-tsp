@@ -272,6 +272,7 @@
                             data : "subject=" + encodeURIComponent(s.id),
                             callback : function (obj) {
                                 if (obj.err) {
+                                    alertFailure("#selectSubjectAlert", obj.err);
                                 } else {
                                     var origin = subjectDictionary[profile.selected];
                                     origin.selected_by = subjectRemoveMyself(origin.selected_by, profile.username);
@@ -287,7 +288,7 @@
                                 }
                             },
                             error : function(){
-                                // TODO Handle errors
+                                alertInternalError("#selectStudentAlert");
                             }
                         });
                         return false;
