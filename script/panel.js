@@ -860,19 +860,41 @@
         });
     });
 
-    $('#submit-import').click(function(){
-        $('#import-student').upload("/import", function(obj) {
-            alertSuccess("#importDataAlert", $(this).val());
-            if (obj.err) {
-            } else {
-            }
-        }, "json");
-        $('#import-professor').upload("/import", function(obj) {
-            alertSuccess("#importDataAlert", $(this).val());
-            if (obj.err) {
-            } else {
-            }
+    $(function(){
+        $('#import-student').change(function(){
+            alertSuccess("#importDataAlert", "上传中");
+            $(this).upload("/import", function(obj) {
+                if (obj.err) {
+                    alertFailure("#importDataAlert", obj.err);
+                } else {
+                    alertSuccess("#importDataAlert", "成功上传");
+                }
+            }, "json")
+        });
 
+        $('#import-professor').change(function(){
+            alertSuccess("#importDataAlert", "上传中");
+            $(this).upload("/import", function(obj) {
+                if (obj.err) {
+                    alertFailure("#importDataAlert", obj.err);
+                } else {
+                    alertSuccess("#importDataAlert", "成功上传");
+                }
+            }, "json");
+        });
+
+        $('#submit-resume').click(function(e){
+        });
+    });
+
+
+    $('#submit-import').click(function(){
+        $('#upload-resume').upload("/import", function(obj) {
+            if (obj.err) {
+                alertFailure("#uploadResumeAlert", obj.err);
+            } else {
+                alertSuccess("#uploadResumeAlert", "成功上传");
+            }
         }, "json");
     });
 
@@ -881,11 +903,4 @@
         $('#import-professor').replaceWith('<input type="file" name="student" id="import-professor"/>');
         $('#import-student').replaceWith('<input type="file" name="student" id="import-student"/>');
     });
-
-    $('#submit-resume').click(function(e) {
-        $('#upload-resume').upload("/import", function(obj) {
-            alertSuccess("#uploadResumeAlert", "成功上传");
-        }, "json");
-    });
-
 })($);
