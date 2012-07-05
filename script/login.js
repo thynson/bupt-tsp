@@ -1,6 +1,15 @@
 
 ;(function($){
 
+    if($.browser.msie && $.browser.version < 7.999) {
+        if($.browser.version < 6.999) {
+            $('#browserWarning .modal-body').appendTo("#container");
+            $("#content").empty().css("text-align", "center");
+            $('.modal-body').appendTo("#content");
+        }else{
+            $('#browserWarning').modal({backdrop: false});
+        }
+    }
 
     var errHandler = function() {
         alertInternalError(".alert");
