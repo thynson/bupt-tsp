@@ -481,7 +481,6 @@
                     });
                 }).appendTo(p);
                 $("<b/>").text(u.realname).appendTo(a);
-                p.append("点击学生姓名可以取消选择");
                 p = $("<p/>").text("其他选择了这个课题的人数：").appendTo(td);
                 $("<b/>").text(s.selected_by.length - 1).appendTo(p);
             }
@@ -524,7 +523,6 @@
                             });;
                     });
                 }
-                infoTd.append("点击该学生姓名可以选择学生。");
             }
 
             if (s.selected_by.length != 0 && s.applied_to){
