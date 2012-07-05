@@ -418,7 +418,7 @@
 
                     // TODO Handle the open of professor profile and student
                     // profile
-                    selcon.append("该项目")
+                    selcon.text("该项目")
                         .append($("<a/>").text(s.professor.realname).attr("href", "#" + s.professor.username))
                         .append("导师选择了").append($("<a/>").text(s.applied_to.realname).attr("href", "#" + s.applied_to.username))
                         .append("完成此项目，本项目双选过程已完结");
