@@ -474,7 +474,7 @@
                         url : "/approve",
                         data : postdata,
                         callback : function(obj) {
-                            unselectStudent();
+                            unselectStudent(s);
                         },
                         error : function(){
                         }
