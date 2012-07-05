@@ -280,7 +280,7 @@
                                 } else {
                                     var origin = subjectDictionary[profile.selected];
                                     if (origin) {
-                                        origin.selected_by = subjectRemoveMyself(origin.selected_by, profile.username);
+                                        origin.selected_by = removeFromList(origin.selected_by, profile.username);
                                         origin.updateInfo();
                                     }
 
@@ -324,7 +324,7 @@
                                             } else {
                                                 var origin = subjectDictionary[profile.selected];
                                                 if (origin) {
-                                                    origin.selected_by = subjectRemoveMyself(origin.selected_by, profile.username);
+                                                    origin.selected_by = removeFromList(origin.selected_by, profile.username);
                                                     origin.updateInfo();
                                                 }
                                             }

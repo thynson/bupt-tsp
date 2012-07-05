@@ -77,7 +77,7 @@
         return list.join('&');
     }
 
-    subjectRemoveMyself = function(selectlist, username) {
+    removeFromList = function(selectlist, username) {
         var ret = [];
         $.each(selectlist, function(i, s) {
             if (s.username == username)
