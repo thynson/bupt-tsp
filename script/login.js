@@ -66,7 +66,7 @@
 
     window.updateAnnounce = (function(){
         getJson({
-            url : "/announce",
+            url : "/announce?time=" + new Date().getTime(),
             callback : function(obj) {
                 if (obj.err) {
                 } else {
