@@ -75,21 +75,21 @@
                 .parents(".control-group:first").addClass("error");
                 avaform=false;
             }
-            
+
             if(!subject.type2) {
                 $('#subject-form div[name="type2"]').parents(".controls:first").
                 append($("<span/>").addClass("help-block").text("第二课题分类未选择"))
                 .parents(".control-group:first").addClass("error");
                 avaform=false;
             }
-            
+
             if(!subject.source) {
                 $('#subject-form div[name="source"]').parents(".controls:first").
                 append($("<span/>").addClass("help-block").text("课题来源未选择"))
                 .parents(".control-group:first").addClass("error");
                 avaform=false;
             }
-            
+
             return avaform;
 
         };
@@ -540,16 +540,24 @@
         }
 
         var addToOverview = function(s) {
-            if (s.applied_to && !(s.selected_by && s.selected_by.length != 0)) {
-                var ovTable = $("#overview-table");
+            var ovTable = $("#overview-table");
+            var studentName;
+            var studentUsername;
 
-                ovTable.append($("<tr/>")
-                    .append($("<td/>").text(s.name))
-                    .append($("<td/>").append(
-                        $("<a/>").text(s.professor.realname).attr("href", "#"+s.professor.username)))
-                    .append($("<td/>").append(
-                        $("<a/>").text(s.applied_to.realname).attr("href", "#"+s.applied_to.username))));
+            if (s.applied_to) {
+                studentName = s.applied_to.realname;
+                studentUsername = s.applied_to.username;
+            } else {
+                studentName = "";
+                studentUsername = "";
             }
+
+            ovTable.append($("<tr/>")
+                .append($("<td/>").text(s.name))
+                .append($("<td/>").append(
+                    $("<a/>").text(s.professor.realname).attr("href", "#"+s.professor.username)))
+                .append($("<td/>").append(
+                    $("<a/>").text(studentName).attr("href", "#"+studentUsername))));
         }
 
 
