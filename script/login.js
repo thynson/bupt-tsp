@@ -12,7 +12,7 @@
     }
 
     var errHandler = function() {
-        alertInternalError(".alert");
+        alertInternalError("#alertAction");
     };
 
     ajaxSubmit($("#loginForm"), function(){
@@ -30,7 +30,7 @@
             callback : function(obj){
                 try {
                     if (obj.err) {
-                        alertFailure(".alert", obj.err);
+                        alertFailure("#alertAction", obj.err);
                     } else {
                         // Clear cookie first
                         $.cookie("username", null);
