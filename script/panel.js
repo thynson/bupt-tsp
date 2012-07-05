@@ -136,7 +136,7 @@
                     desc : $('#subject-form textarea[name="desc"]').val(),
                     type1 : $('#subject-form div[name="type1"] .active').attr("name"),
                     type2 : $('#subject-form div[name="type2"] .active').attr("name"),
-                    source : $('#subject-form div[name="source"] .active').attr("name"),
+                    source : $('#subject-form div[name="source"] .active').attr("name")
                 };
 
                 if(!validateForm(subject)) {
@@ -236,7 +236,7 @@
                         desc : $('#subject-form textarea[name="desc"]').val(),
                         type1 : $('#subject-form div[name="type1"] .active').attr("name"),
                         type2 : $('#subject-form div[name="type2"] .active').attr("name"),
-                        source : $('#subject-form div[name="source"] .active').attr("name"),
+                        source : $('#subject-form div[name="source"] .active').attr("name")
                     };
 
                     if(!validateForm(subject)) {
