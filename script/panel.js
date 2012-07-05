@@ -220,7 +220,6 @@
             }
         }).resize();
 
-        var subjectDictionary = {};
         var addToSubjectTable = function(s) {
 
             //
@@ -240,9 +239,6 @@
             );
 
             var selconTr = $("<tr/>").addClass("extra subject-cond hide").appendTo("#subject-table");
-
-
-            subjectDictionary[s.id] = s;
 
             s.updateInfo = function() {
                 tr.empty(); // Clear this column
@@ -496,7 +492,100 @@
             addToSubjectTable(s);
             addToSelectStudent(s);
             addToOverview(s);
+            addToUnselectedTable(s);
         }
+
+        var activeUnselectStudent = null;
+        var lastUnselectTr = null;
+        var processStudent = function(s) {
+            if (phase.phase == 5) {
+                if (s.applied_to)
+                    return;
+
+                var tr = $("<tr/>").appendTo($('#match-table')).click(function(){
+                    $('#match-subject-list').insertAfter(p);
+                    if (activeUnselectStudent == null) {
+                        activeUnselectStudent = s;
+                        $('#match-subject-list').show("fast");
+                    } else if (activeUnselectStudent == s) {
+                        activeUnselectStudent = null;
+                        $('#match-subject-list').hide('fast');
+                    } else {
+                        activeUnselectStudent = s;
+                    }
+                });
+                lastUnselectTr = tr;
+                s.unselectTr = tr;
+                var td = $("<td/>").appendTo(tr);
+                var p = $("<p/>").text(s.realname).appendTo(td);
+                var td = $("<td/>").text(s.realname);
+            }
+        }
+
+        var addToUnselectedTable = function(s) {
+            if (s.applied_to) {
+                return;
+            }
+            unselectedSubjectList.push(s);
+        }
+
+        var beginProcess = function() {
+
+            // Prepare subjectDictionary
+            $.each(subjectList, function(i, s) {
+                subjectDictionary[s.id] = s;
+            });
+
+            // Prepare studentDictionary
+            $.each(studentList, function(i, s) {
+                studentDictionary[s.id] = s;
+            });
+
+            $.each(subjectList, function(i, s){
+                processSubject(s);
+            });
+
+            $.each(unselectedSubjectList, function(i, s){
+                var li = $("<li/>").appendTo($('#match-subject-list'));
+                var a = $("<a/>").appendTo(li).text(s.name).click(function(){
+
+                    var postdata = serializeObject({
+                        student : activeUnselectStudent.username,
+                        subject : s.id
+                    });
+
+                    postJson({
+                        url : "/match",
+                        data : postdata,
+                        callback : function(obj) {
+                            if (obj.err) {
+                            } else {
+                                //TODO: update status
+                                li.hide();
+                                activeUnselectStudent.unselectTr.insertAfter(lastUnselectTr);
+                                lastUnselectTr = activeUnselectStudent.unselectTr;
+                                activeUnselectStudent = null;
+                                lastUnselectTr.hide();
+                            }
+                        },
+                        error : function(obj) {
+                        }
+                    });
+
+                });
+
+            });
+
+            $.each(studentList, function(i, s){
+                processStudent(s);
+            });
+
+        }
+
+        var subjectList = null, studentList = null;
+        var subjectDictionary = {};
+        var studentDictionary = {};
+        var unselectedSubjectList = [];
 
         getJson({
             url : "/subject",
@@ -505,16 +594,40 @@
             callback : function(obj) {
                 if (obj.err) {
                 } else {
-                    $.each(obj.subject, function(i, s){
-                        processSubject(s);
-                    });
+                    subjectList = obj.subject;
+                    if (subjectList && studentList) {
+                        beginProcess();
+                    }
                 }
             }
         });
+
+        getJson({
+            url : "/student",
+            error : function() {
+            },
+            callback : function(obj) {
+                if (obj.err) {
+
+                } else {
+                    studentList = obj.student;
+                    if (subjectList && studentList) {
+                        beginProcess();
+                    }
+                }
+            }
+        });
+
+        if (phase.phase == 5) {
+            $('#match-student p').text('下表为尚未成功选择毕业设计的学生，点击表格的列可以为该学生展开选择课题列表');
+            $('#match-student table').show();
+        } else {
+            $('#match-student p').text('当前阶段不能调剂');
+        }
     };
 
 
-    var profile;
+    var profile = null, phase = null;
     getJson({
         url : "/profile",
         error : logout,
@@ -530,26 +643,26 @@
                 $(".profile-" + attr).text(obj[attr]);
             }
 
-            getSubjectDetail();
+            if (profile && phase)
+                getSubjectDetail();
 
         }
     });
 
+    getJson({
+        url : "/phase",
+        callback : function(obj) {
+            $(".phase-prev").text(obj.phase-1);
+            $(".phase-current").text(obj.phase);
+            $(".phase-next").text(obj.phase+1);
+            enablePhase(obj.phase);
+            phase = obj;
 
+            if (profile && phase)
+                getSubjectDetail();
 
-    var updatePhase = function(){
-        getJson({
-            url : "/phase",
-            callback : function(obj) {
-                $(".phase-prev").text(obj.phase-1);
-                $(".phase-current").text(obj.phase);
-                $(".phase-next").text(obj.phase+1);
-                enablePhase(obj.phase);
-            }
-        });
-    }
-
-    updatePhase();
+        }
+    });
 
     // Setup logout button
     $("#logout").click(logout);
