@@ -39,6 +39,22 @@
         });
     });
 
+    var updatePhase = function(){
+        getJson({
+            url : "/phase",
+            callback : function(obj) {
+                if(obj.err){
+                }else{
+                    $("#phaseText").text("当前阶段为").append($("<b/>").text(localePhase(obj.phase))).show();
+                }
+            }   
+        }); 
+    }   
+
+    updatePhase();
+
+
+
     window.updateAnnounce = (function(){
         getJson({
             url : "/announce",

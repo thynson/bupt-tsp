@@ -17,3 +17,7 @@
 #loginForm table td {
     min-width: 50px;
 }
+
+#phaseText {
+    text-align: center;
+}

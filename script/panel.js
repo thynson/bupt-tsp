@@ -729,15 +729,14 @@
     getJson({
         url : "/phase",
         callback : function(obj) {
-            $(".phase-prev").text(obj.phase-1);
-            $(".phase-current").text(obj.phase);
-            $(".phase-next").text(obj.phase+1);
+            $(".phase-prev").text(localePhase(obj.phase-1));
+            $(".phase-current").text(localePhase(obj.phase));
+            $(".phase-next").text(localePhase(obj.phase+1));
             enablePhase(obj.phase);
-            phase = obj;
+        phase = obj;
 
-            if (profile && phase)
-                getSubjectDetail();
-
+        if (profile && phase)
+            getSubjectDetail();
         }
     });
 

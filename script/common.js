@@ -94,6 +94,11 @@
         $(this).goTo();
     });
 
+    localePhase = function(index) {
+        if(index < 0) return "无";
+        return ["选课前准备","学生初选","导师初选","学生补选","导师补选","调剂阶段","最终确认","无"][index];
+    }
+
 })($);
 
 // jQuery Extension to goTo
