@@ -623,8 +623,10 @@
                 var li = $("<li/>").appendTo($('#match-subject-list'));
                 var a = $("<a/>").appendTo(li).text(s.name).click(function(){
 
+                    var stu = activeUnselectStudent;
+
                     var postdata = serializeObject({
-                        student : activeUnselectStudent.username,
+                        student : stu.username,
                         subject : s.id
                     });
 
@@ -636,8 +638,8 @@
                             } else {
                                 //TODO: update status
                                 li.hide();
-                                activeUnselectStudent.unselectTr.insertAfter(lastUnselectTr);
-                                lastUnselectTr = activeUnselectStudent.unselectTr;
+                                stu.unselectTr.insertAfter(lastUnselectTr);
+                                lastUnselectTr = stu.unselectTr;
                                 activeUnselectStudent = null;
                                 lastUnselectTr.hide();
                             }
