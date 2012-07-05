@@ -17,3 +17,7 @@ textarea.textarea {
 #my-subject .btn-toolbar {
     text-align: right;
 }
+
+#subject-form {
+    text-align: left;
+}
