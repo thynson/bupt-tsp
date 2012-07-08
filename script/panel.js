@@ -881,20 +881,18 @@
             }, "json");
         });
 
-        $('#submit-resume').click(function(e){
+        $('#submit-resume').click(function(){
+            $('#upload-resume').upload("/resume", function(obj) {
+                if (obj.err) {
+                    alertFailure("#uploadResumeAlert", obj.err);
+                } else {
+                    alertSuccess("#uploadResumeAlert", "成功上传");
+                }
+            }, "json");
         });
     });
 
 
-    $('#submit-import').click(function(){
-        $('#upload-resume').upload("/import", function(obj) {
-            if (obj.err) {
-                alertFailure("#uploadResumeAlert", obj.err);
-            } else {
-                alertSuccess("#uploadResumeAlert", "成功上传");
-            }
-        }, "json");
-    });
 
     $('#reset-import').click(function(e){
         e.preventDefault();
