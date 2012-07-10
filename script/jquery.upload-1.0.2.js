@@ -1,5 +1,5 @@
 /*
- * jQuery.upload v1.0.2
+ * jQuery.upload v1.0.2, modified by LAN Xingcan
  *
  * Copyright (c) 2010 lagos
  * Dual licensed under the MIT and GPL licenses.

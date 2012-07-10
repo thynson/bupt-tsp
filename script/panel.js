@@ -1,5 +1,9 @@
 /*
- * Panel logic
+ * Copyright (c) 2012 School of Software, BUPT
+ * Copyright (c) 2012 LAN Xingcan
+ * Copyright (c) 2012 CHEN Jie
+ *
+ * All right reserved
  */
 
 (function($){
