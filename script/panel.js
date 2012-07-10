@@ -497,10 +497,20 @@
                         if (i != 0) {
                             infoTd.append(splitter);
                         }
+                        var div = $("<div/>").appendTo(infoTd).css("display", "inline").addClass("resume");
+
+                        var resume = $("<div/>").append("（").append(
+                            $("<a/>").text("下载简历").attr("href", "/resume?student=" + u.username)
+                                .attr('target', '_blank'))
+                            .append("）")
+                            .css("display", "inline").hover(function(){ },
+                            function(){
+                                resume.hide();
+                            }).addClass('download-resume');
 
                         $("<a/>").text(u.realname)
                             .attr("href", "#")// + s.username
-                            .appendTo(infoTd)
+                            .appendTo(div)
                             .click(function(){
                                 var postdata = "subject=" + encodeURIComponent(s.id)
                                 + "&student=" + encodeURIComponent(u.username);
@@ -520,8 +530,17 @@
                                     }
                                 });
 
-                            });;
+                            }).hover(function(){
+                                    // hover in
+                                    $('.download-resume').hide();
+                                    resume.show();
+                                }, function(){
+                                    // hover out
+                                }
+                            );
+                        resume.appendTo(div);
                     });
+                    $('.download-resume').hide();
                 }
             }
 
