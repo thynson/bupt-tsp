@@ -108,6 +108,7 @@
         $("#add-subject").click(function () {
 
             $('#delete-subject').hide();
+            $('#subjectFormAlert').hide();
 
             if($("#subject-form").prev()[0] == this && $("#subject-form").is(":visible"))
                 return;
@@ -195,6 +196,8 @@
             var p = $("<p/>").appendTo($("<td/>").appendTo(tr));
 
             tr.click(function(){
+
+                $('#subjectFormAlert').hide();
 
                 $('#delete-subject').show();
                 $('#delete-subject').unbind('click');
