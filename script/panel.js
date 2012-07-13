@@ -166,7 +166,8 @@
                             alertSuccess("#subjectFormAlert", "成功增加课题");
                             $('#subject-form').hide("fast");
 
-                            addToMySubject(subject);
+                            processSubject(subject);
+                            //addToMySubject(subject);
                             // TODO Update the subject-table
                         }
                     },
@@ -184,10 +185,11 @@
 
             if (s.professor.username != profile.username)
                 return;
+
             //
             // Add a entry for subject list
             //
-            var p = $("<p/>").text(s.name).appendTo($("<td/>").appendTo(
+            var p = $("<p/>").appendTo($("<td/>").appendTo(
             $("<tr/>").appendTo($("#my-subject-table"))
             .click(function(){
 
@@ -261,8 +263,14 @@
                                 s.type1 = subject.type1;
                                 s.type2 = subject.type2;
                                 s.source = subject.source;
+
+                                s.updateInfo();
+                                s.updateOverview();
+                                s.updateSelectStudent();
+                                s.updateMySubject();
                                 //getSubjectDetail();
                                 alertSuccess("#subjectFormAlert", "更新成功");
+                                $("#subject-form .legend").text("编辑课题：" + p.text());
                             }
                         },
                         error : function() {
@@ -272,6 +280,12 @@
                     });
                 });
             })));
+
+            s.updateMySubject = function(){
+                var s = this;
+                p.text(s.name);
+            };
+            s.updateMySubject();
         }
 
         var $subjectselecttable = $("#subject-select-table");
@@ -312,6 +326,9 @@
             var selconTr = $("<tr/>").addClass("extra subject-cond hide").appendTo("#subject-table");
 
             s.updateInfo = function() {
+
+                var s = this;
+
                 tr.empty(); // Clear this column
                 tr.append($("<td/>").text(s.name)).addClass("subject-title")
                 .append($("<td/>").append($("<a/>").text(s.professor.realname).attr("href", "#" + s.professor.username)
@@ -445,120 +462,128 @@
 
             var tbody = $("#subject-selection-table");
             var tr = $("<tr/>").appendTo(tbody);
-            var infoTr = $("<tr/>")
-                .appendTo(tbody)
-                .addClass("hide");
-            var infoTd = $("<td/>")
-                .appendTo(infoTr)
-                .attr("colspan", 2);
+
+            s.updateSelectStudent = function(){
+                var s = this;
+                tr.empty();
+                var infoTr = $("<tr/>")
+                    .appendTo(tbody)
+                    .addClass("hide");
+                var infoTd = $("<td/>")
+                    .appendTo(infoTr)
+                    .attr("colspan", 2);
+
+                $("<td/>").text(s.name).appendTo(tr);
+                var td = $("<td/>").appendTo(tr);
+
+
+                var unselectStudent = function(s) {
+                    td.empty();
+                    var p = $("<p/>").text("选择了这个课题的人数：").appendTo(td);
+                    $("<b/>").text(s.selected_by.length).appendTo(p);
+                }
+                //
+                // u: The student
+                // s: The subject
+                var selectStudent = function(u, s) {
+                    td.empty();
+                    var p = $("<p/>").text("已选择:").appendTo(td);
+                    var a = $("<a/>").click(function(){
+                        // post unselcect
+                        var postdata = "subject=" + encodeURIComponent(s.id);
+                        postJson({
+                            url : "/approve",
+                            data : postdata,
+                            callback : function(obj) {
+                                unselectStudent(s);
+                            },
+                            error : function(){
+                            }
+                        });
+                    }).appendTo(p);
+                    $("<b/>").text(u.realname).appendTo(a);
+                    p = $("<p/>").text("其他选择了这个课题的人数：").appendTo(td);
+                    $("<b/>").text(s.selected_by.length - 1).appendTo(p);
+                }
+
+                if (s.selected_by) {
+
+                    if(!s.selected_by.length) {
+                        infoTd.append("该项目尚未有学生选报");
+                    }else{
+                        infoTd.append("选择该课程的学生：");
+                        $.each(s.selected_by, function(i, u){
+                            var splitter = "、 ";
+
+                            if (i != 0) {
+                                infoTd.append(splitter);
+                            }
+                            var div = $("<div/>").appendTo(infoTd).css("display", "inline").addClass("resume");
+
+                            var resume = $("<div/>").append("（").append(
+                                $("<a/>").text("下载简历").attr("href", "/resume?student=" + u.username)
+                                    .attr('target', '_blank'))
+                                .append("）")
+                                .css("display", "inline").hover(function(){ },
+                                function(){
+                                    resume.hide();
+                                }).addClass('download-resume');
+
+                            $("<a/>").text(u.realname)
+                                .attr("href", "#")// + s.username
+                                .appendTo(div)
+                                .click(function(){
+                                    var postdata = "subject=" + encodeURIComponent(s.id)
+                                    + "&student=" + encodeURIComponent(u.username);
+                                    postJson({
+                                        url : "/approve",
+                                        data : postdata,
+                                        callback : function(obj) {
+                                            if (obj.err) {
+                                                alertFailure("#selectStudentAlert", obj.err);
+                                            } else {
+                                                selectStudent(u, s);
+                                                alertSuccess("#selectStudentAlert", "选择成功");
+                                            }
+                                        },
+                                        error : function(obj) {
+                                            alertInternalError("#selectStudentAlert");
+                                        }
+                                    });
+
+                                }).hover(function(){
+                                        // hover in
+                                        $('.download-resume').hide();
+                                        resume.show();
+                                    }, function(){
+                                        // hover out
+                                    }
+                                );
+                            resume.appendTo(div);
+                        });
+                        $('.download-resume').hide();
+                    }
+                }
+
+                if (s.selected_by.length != 0 && s.applied_to){
+                    selectStudent(s.applied_to, s);
+                } else if (s.applied_to) {
+                    var p = $("<p/>").text("已选择:").appendTo(td);
+                    $("<b/>").text(s.applied_to.realname).appendTo(p);
+                } else if (s.selected_by.length != 0) {
+                    unselectStudent(s);
+                } else {
+                    var p = $("<p/>").text("无人报选").appendTo(td);
+
+                }
+            }
 
             tr.click(function(){
                 tr.next().toggle("fast");
             });
 
-            $("<td/>").text(s.name).appendTo(tr);
-            var td = $("<td/>").appendTo(tr);
+            s.updateSelectStudent();
 
-
-            var unselectStudent = function(s) {
-                td.empty();
-                var p = $("<p/>").text("选择了这个课题的人数：").appendTo(td);
-                $("<b/>").text(s.selected_by.length).appendTo(p);
-            }
-            //
-            // u: The student
-            // s: The subject
-            var selectStudent = function(u, s) {
-                td.empty();
-                var p = $("<p/>").text("已选择:").appendTo(td);
-                var a = $("<a/>").click(function(){
-                    // post unselcect
-                    var postdata = "subject=" + encodeURIComponent(s.id);
-                    postJson({
-                        url : "/approve",
-                        data : postdata,
-                        callback : function(obj) {
-                            unselectStudent(s);
-                        },
-                        error : function(){
-                        }
-                    });
-                }).appendTo(p);
-                $("<b/>").text(u.realname).appendTo(a);
-                p = $("<p/>").text("其他选择了这个课题的人数：").appendTo(td);
-                $("<b/>").text(s.selected_by.length - 1).appendTo(p);
-            }
-
-            if (s.selected_by) {
-
-                if(!s.selected_by.length) {
-                    infoTd.append("该项目尚未有学生选报");
-                }else{
-                    infoTd.append("选择该课程的学生：");
-                    $.each(s.selected_by, function(i, u){
-                        var splitter = "、 ";
-
-                        if (i != 0) {
-                            infoTd.append(splitter);
-                        }
-                        var div = $("<div/>").appendTo(infoTd).css("display", "inline").addClass("resume");
-
-                        var resume = $("<div/>").append("（").append(
-                            $("<a/>").text("下载简历").attr("href", "/resume?student=" + u.username)
-                                .attr('target', '_blank'))
-                            .append("）")
-                            .css("display", "inline").hover(function(){ },
-                            function(){
-                                resume.hide();
-                            }).addClass('download-resume');
-
-                        $("<a/>").text(u.realname)
-                            .attr("href", "#")// + s.username
-                            .appendTo(div)
-                            .click(function(){
-                                var postdata = "subject=" + encodeURIComponent(s.id)
-                                + "&student=" + encodeURIComponent(u.username);
-                                postJson({
-                                    url : "/approve",
-                                    data : postdata,
-                                    callback : function(obj) {
-                                        if (obj.err) {
-                                            alertFailure("#selectStudentAlert", obj.err);
-                                        } else {
-                                            selectStudent(u, s);
-                                            alertSuccess("#selectStudentAlert", "选择成功");
-                                        }
-                                    },
-                                    error : function(obj) {
-                                        alertInternalError("#selectStudentAlert");
-                                    }
-                                });
-
-                            }).hover(function(){
-                                    // hover in
-                                    $('.download-resume').hide();
-                                    resume.show();
-                                }, function(){
-                                    // hover out
-                                }
-                            );
-                        resume.appendTo(div);
-                    });
-                    $('.download-resume').hide();
-                }
-            }
-
-            if (s.selected_by.length != 0 && s.applied_to){
-                selectStudent(s.applied_to, s);
-            } else if (s.applied_to) {
-                var p = $("<p/>").text("已选择:").appendTo(td);
-                $("<b/>").text(s.applied_to.realname).appendTo(p);
-            } else if (s.selected_by.length != 0) {
-                unselectStudent(s);
-            } else {
-                var p = $("<p/>").text("无人报选").appendTo(td);
-
-            }
         }
 
         var addToOverview = function(s) {
@@ -574,12 +599,19 @@
                 studentUsername = "";
             }
 
-            ovTable.append($("<tr/>")
-                .append($("<td/>").text(s.name))
-                .append($("<td/>").append(
-                    $("<a/>").text(s.professor.realname).attr("href", "#"+s.professor.username)))
-                .append($("<td/>").append(
-                    $("<a/>").text(studentName).attr("href", "#"+studentUsername))));
+            var tr = $("<tr/>").appendTo(ovTable);
+            var nameTd = $("<td/>").appendTo(tr);
+            var profTd = $("<td/>").appendTo(tr);
+            var stuTd = $("<td/>").appendTo(tr);
+
+            s.updateOverview = function() {
+                nameTd.text(this.name);
+                profTd.text(this.professor.realname);
+            }
+            if (studentUsername != "") {
+                stuTd.append($("<a/>").text(studentName).attr("href", "#"+studentUsername));
+            }
+            s.updateOverview();
         }
 
 
