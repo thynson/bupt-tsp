@@ -107,6 +107,8 @@
 
         $("#add-subject").click(function () {
 
+            $('#delete-subject').hide();
+
             if($("#subject-form").prev()[0] == this && $("#subject-form").is(":visible"))
                 return;
 
@@ -189,9 +191,29 @@
             //
             // Add a entry for subject list
             //
-            var p = $("<p/>").appendTo($("<td/>").appendTo(
-            $("<tr/>").appendTo($("#my-subject-table"))
-            .click(function(){
+            var tr = $("<tr/>").appendTo($("#my-subject-table"));
+            var p = $("<p/>").appendTo($("<td/>").appendTo(tr));
+
+            tr.click(function(){
+
+                $('#delete-subject').show();
+                $('#delete-subject').unbind('click');
+                $('#delete-subject').click(function(){
+                    var postdata = {
+                        id : s.id
+                    };
+                    postdata = serializeObject(postdata);
+
+                    $.post('/delete', postdata, function(obj){
+                        if (obj.err) {
+                            alertFailure('#subjectFormAlert', obj.err);
+                        } else {
+                            $('#subject-form').hide('fast');
+                            tr.hide('fast');
+                        }
+                    }, "json");
+                    return false;
+                });
 
                 if($("#subject-form").parent().parent()[0] == this && $("#subject-form").is(":visible"))
                     return;
@@ -279,7 +301,7 @@
                         }
                     });
                 });
-            })));
+            });
 
             s.updateMySubject = function(){
                 var s = this;
