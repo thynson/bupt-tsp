@@ -345,7 +345,7 @@
                 $("<tr/>").addClass("extra subject-desc hide")
                 .append($("<td/>").attr("colspan", $("#subject-select-table").attr("extra-span"))
                     .append($("<h4/>").text("课题描述"))
-                    .append($("<p/>").text(s.desc)))
+                    .append($("<pre/>").text(s.desc)))
             );
 
             var selconTr = $("<tr/>").addClass("extra subject-cond hide").appendTo("#subject-table");
