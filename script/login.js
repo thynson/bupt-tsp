@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 School of Software, BUPT
+ * Copyright (c) 2012 LAN Xingcan
+ * Copyright (c) 2012 CHEN Jie
+ *
+ * All right reserved
+ */
 
 ;(function($){
 
@@ -56,9 +63,9 @@
                 }else{
                     $("#phaseText").text("当前阶段为").append($("<b/>").text(localePhase(obj.phase))).show();
                 }
-            }   
-        }); 
-    }   
+            }
+        });
+    }
 
     updatePhase();
 

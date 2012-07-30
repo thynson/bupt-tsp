@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<!--
+ -
+ -  Copyright (c) 2012 School of Software, BUPT
+ -  Copyright (c) 2012 LAN Xingcan
+ -  Copyright (c) 2012 CHEN Jie
+ -
+ -  All right reserved
+ -
+-->
 <html>
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -196,12 +205,8 @@
               </div>
 
               <div class="nav-list-pane fade " id="my-subject">
-                <div class="alert fade in hide"
-                  data-alert="alert" id="subjectFormAlert">
-                  <a class="close" href="#">&times</a>
-                  <p class="info"><p>
-                </div>
                 <div class="legend">我的课题</div>
+                <p>在此页，您可以点击“添加课题”按钮来添加课题。如果需要编辑课题，请直接点击下表中对应课题的列</p>
                 <div class="btn-toolbar">
                   <button class="btn btn-primary"
                     id="add-subject"><i class="icon-plus-sign icon-white"></i>新增课题</button>
@@ -258,6 +263,12 @@
                     <div class="form-actions">
                       <button class="btn btn-primary" type="submit">提交</button>
                       <button class="btn close-form">关闭</button>
+                      <button class="btn btn-inverse hide" id="delete-subject">删除</button>
+                      <div class="alert fade in hide"
+                        data-alert="alert" id="subjectFormAlert">
+                        <a class="close" href="#">&times</a>
+                        <p class="info"><p>
+                      </div>
                     </div>
                   </fieldset>
                 </form>
@@ -421,7 +432,7 @@
 
               <div class="nav-list-pane fade" id="overview">
                 <div class="legend">总览</div>
-                <p>下表列出所有所有已被成功报选的课题，对应的导师和报选的学生</p>
+                <p>下表列出所有所有已被成功报选的课题，对应的导师和报选的学生，此表仅列出结果，不能进行任何操作</p>
                 <table class="table table-bordered table-striped table-fixed">
                   <thead>
                     <th width="60%">课题</th>
@@ -467,8 +478,8 @@
       <div id="footer" >
         <hr/>
         <p>Copyright &copy; 2012 All right reserved</p>
-        <p>UI effect is powered by <a
-          href="http://twitter.github.com/bootstrap/">Bootstrap</a></p>
+        <p>Script enhenced by <a href="http://jquery.com">JQuery</a></p>
+        <p>CSS enhenced by <a href="http://twitter.github.com/bootstrap/">Bootstrap</a></p>
       </div>
 
     </div>
