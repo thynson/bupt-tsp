@@ -938,6 +938,25 @@
         });
     });
 
+    ajaxSubmit($('#resetPassword'), function() {
+        var username = $('#resetPassword input[type="text"]').val()
+        var postdata = "username=" + encodeURIComponent(username);
+        postJson({
+            url : "/resetpw",
+            data : postdata,
+            callback : function(obj) {
+                if (obj.err) {
+                    alertFailure("#resetpwAlert", obj.err);
+                } else {
+                    $('#resetPassword input[type="text"]').value("");
+                }
+            },
+            error : function(obj) {
+                alertInternalError("#resetpwAlert");
+            }
+        });
+    });
+
     $(function(){
         $('#import-student').change(function(){
             alertSuccess("#importDataAlert", "上传中");
