@@ -40,6 +40,7 @@
               <li class="Professor hide"><a data-toggle="nav-list" href="#student"><i class="icon-ok"></i>查看选择学生</a></li>
               <li class="Admin hide"><a data-toggle="nav-list" href="#system-admin"><i class="icon-wrench"></i>系统管理</a></li>
               <li class="Admin hide"><a data-toggle="nav-list" href="#match-student"><i class="icon-leaf"></i>调剂学生</a></li>
+              <li class="Admin hide"><a data-toggle="nav-list" href="#resetpw"><i class="icon-fire"></i>用户密码重置</a></li>
               <li class=""><a data-toggle="nav-list" href="#overview"><i
                   class="icon-eye-open"></i>总览</a></li>
 
@@ -456,6 +457,28 @@
                 </table>
                 <ul id="match-subject-list" class="hide">
                 </ul>
+              </div>
+
+              <div class="nav-list-pane fade" id="resetpw">
+                <form class="form-horizontal" id="resetPassword">
+                  <div class="legend">用户密码重置</div>
+                  <div class="control-group">
+                    <label class="control-label">用户名</label>
+                    <div class="controls">
+                      <input type="text" name="username" id="resetpw-username"/>
+                      <p class="help-block">使用此功能可以重置学生或教职员工的密码至初始状态（与用户名一致）</p>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="btn btn-primary" id="submit-resetpw">提交</button>
+                    <button class="btn" id="reset-resetpw">重置</button>
+                    <div class="alert fade in hide" data-alert="alert"
+                      id="resetpwAlert">
+                      <a class="close" href="#">&times</a>
+                      <p class="info"><p>
+                    </div>
+                  </div>
+                </form>
               </div>
 
               <div class="nav-list-pane fade" id="faq">
