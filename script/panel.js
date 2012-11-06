@@ -948,7 +948,8 @@
                 if (obj.err) {
                     alertFailure("#resetpwAlert", obj.err);
                 } else {
-                    $('#resetPassword input[type="text"]').value("");
+                    alertSuccess("#resetpwAlert", "重置成功");
+                    $('#resetPassword input[type="text"]').val("");
                 }
             },
             error : function(obj) {
